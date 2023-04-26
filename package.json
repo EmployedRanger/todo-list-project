@@ -1,0 +1,27 @@
+{
+  "name": "todo-list-project",
+  "version": "1.0.0",
+  "description": "Todo list made in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/EmployedRanger/todo-list-project.git"
+  },
+  "author": "Employed Ranger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmployedRanger/todo-list-project/issues"
+  },
+  "homepage": "https://github.com/EmployedRanger/todo-list-project#readme",
+  "devDependencies": {
+    "eslint": "^8.39.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "webpack": "^5.81.0",
+    "webpack-cli": "^5.0.2"
+  }
+}
