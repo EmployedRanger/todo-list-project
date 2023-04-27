@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: false,
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -17,4 +17,19 @@ module.exports = {
       template: path.resolve(__dirname, './src/template.html'),
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
+      },
+    ],
+  },
 };
