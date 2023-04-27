@@ -3,5 +3,4 @@
 import startup from './base'
 import './css/style.scss'
 
-console.log('index.js ran');
 startup();
