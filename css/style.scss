@@ -26,13 +26,16 @@ body {
     transition: background 0.5s ease;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-start;
     padding-bottom: 1.2rem;
     color: white;
     padding: 1em;
     font-size: 3rem;
-    .makebigger {
+    .make-bigger {
         scale: 2;
+        padding-right: 12px;
+        font-weight: 600;   
     }
 }
 
@@ -52,6 +55,7 @@ body {
     color: $white;
 }
 
+.project,
 .scheduled-item {
     display: flex;
     flex-direction: row;

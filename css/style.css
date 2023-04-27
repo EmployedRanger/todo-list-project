@@ -23,14 +23,17 @@ body {
   transition: background 0.5s ease;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: flex-start;
   padding-bottom: 1.2rem;
   color: white;
   padding: 1em;
   font-size: 3rem;
 }
-.header .makebigger {
+.header .make-bigger {
   scale: 2;
+  padding-right: 12px;
+  font-weight: 600;
 }
 
 .footer {
@@ -47,6 +50,7 @@ body {
   color: whitesmoke;
 }
 
+.project,
 .scheduled-item {
   display: flex;
   flex-direction: row;
@@ -56,10 +60,12 @@ body {
   border-radius: 12px;
   align-items: center;
 }
+.project p,
 .scheduled-item p {
   font-size: large;
   padding-left: 10px;
 }
+.project:hover,
 .scheduled-item:hover {
   cursor: pointer;
   background-color: rgba(153, 153, 153, 0.2039215686);
