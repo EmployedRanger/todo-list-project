@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -7,6 +8,13 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    clean: false,
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Todo-List',
+      filename: './index.html',
+      template: path.resolve(__dirname, './src/template.html'),
+    }),
+  ],
 };
