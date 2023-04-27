@@ -67,10 +67,19 @@ function createSidebar() {
   return sidebarSection;
 }
 
+function createTodo() {
+  const listContainer = document.createElement('div')
+  listContainer.classList.add('list-container')
+
+
+  return listContainer;
+}
+
 export default function startup() {
   const content = document.querySelector('#content');
   content.appendChild(createHeader());
   content.appendChild(createSidebar());
+  content.appendChild(createTodo());
   content.appendChild(createFooter());
   console.log('web after appends')
 

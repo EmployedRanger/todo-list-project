@@ -10,7 +10,7 @@ export default function createParagraph(text) {
 
 export function createTodoItem(taskName, description) {
   const taskItem = document.createElement('div')
-  taskItem.classList('task-item')
+  taskItem.classList.add('task-item')
 
   const taskTitle = document.createElement('div')
   taskTitle.classList.add('task-name')

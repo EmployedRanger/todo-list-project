@@ -34,8 +34,8 @@ body {
     padding: 1em;
     font-size: 3rem;
     .make-bigger {
-        scale: 2;
-        padding-right: 12px;
+        scale: 2.1;
+        padding-right: 16px;
         font-weight: 600;   
         margin-left: 50px;
     }
@@ -47,52 +47,60 @@ body {
     transition: background 0.5s ease;
     font-size: 1rem;
     line-height: 1;
-    // margin-top: auto;
     @include flex-center;
     overflow: hidden;
-    // position: absolute;
-    // bottom: 0px;
     color: $white;
     height: 5vh;
-}
-
-.project,
-.scheduled-item {
-    display: flex;
-    flex-direction: row;
-    margin: 0.75rem;
-    padding: 0.1rem;
-    padding-left: 1rem;
-    border-radius: 12px;
-    align-items: center;
-    p {
-        font-size: large;
-        padding-left: 10px;
-    }
-    &:hover {
-        cursor: pointer;
-        background-color: adjust-hue($color: $light-grey, $degrees: 200);
-    }
+    position: absolute;
+    bottom: 0;
 }
 
 .sidebar {
     background-color: $light-grey;
     width: 350px;
-    padding: 5px;
+    padding: 10px;
     z-index: 5;
     height: 79vh;
+    // margin: 10px;
+    .project,
+    .scheduled-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-radius: 12px;
+        margin: 5px;
+        p {
+            font-size: medium;
+            padding-left: 0.9rem;
+        }
+        &:hover {
+            cursor: pointer;
+            background-color: adjust-hue($color: $light-grey, $degrees: 200);
+        }
+    }
+    .scheduled-container {
+        margin-top: 20px;
+        .scheduled-item {
+            margin: 0.2rem;
+            padding-left: 1rem;
+        }
+    }
+    .project-container {
+        .project-heading {
+            margin-bottom: 5px;
+            margin-left: 20px;
+            font-weight: 600;
+            font-size: 1.75rem;
+        }
+        .project {
+            margin: 0.5rem;
+            // padding: 0.05rem;
+            padding-left: 1rem;
+        }
+    }
 }
 
 .active {
     background-color: adjust-hue($color: $light-grey, $degrees: 10);
     font-weight: 600;
-}
-
-.project-container {
-    .project-heading {
-        margin-bottom: 5px;
-        margin-left: 25px;
-        font-weight: 600;
-        font-size: 1.75rem;
-    }
 }
