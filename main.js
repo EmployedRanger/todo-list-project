@@ -94,10 +94,19 @@ function createSidebar() {
   return sidebarSection;
 }
 
+function createTodo() {
+  const listContainer = document.createElement('div')
+  listContainer.classList.add('list-container')
+
+
+  return listContainer;
+}
+
 function startup() {
   const content = document.querySelector('#content');
   content.appendChild(createHeader());
   content.appendChild(createSidebar());
+  content.appendChild(createTodo());
   content.appendChild(createFooter());
   console.log('web after appends')
 
@@ -132,7 +141,7 @@ function createParagraph(text) {
 
 function createTodoItem(taskName, description) {
   const taskItem = document.createElement('div')
-  taskItem.classList('task-item')
+  taskItem.classList.add('task-item')
 
   const taskTitle = document.createElement('div')
   taskTitle.classList.add('task-name')
