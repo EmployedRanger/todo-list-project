@@ -57,52 +57,75 @@ body {
   bottom: 0;
 }
 
-.sidebar {
+.active {
+  background-color: rgba(153, 153, 153, 0.2039215686);
+  font-weight: 600;
+}
+
+.main-section-container {
+  display: flex;
+}
+.main-section-container .box-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+.main-section-container .list-container {
+  width: 900px;
+  margin: 0 auto;
+  padding: 10px;
+}
+.main-section-container .list-container button {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  text-align: left;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+.main-section-container .sidebar {
   background-color: rgba(153, 153, 153, 0.2039215686);
   width: 350px;
   padding: 10px;
   z-index: 5;
   height: 79vh;
 }
-.sidebar .project,
-.sidebar .scheduled-item {
+.main-section-container .sidebar .project,
+.main-section-container .sidebar .scheduled-item {
   display: flex;
   flex-direction: row;
   align-items: center;
   border-radius: 12px;
   margin: 5px;
 }
-.sidebar .project p,
-.sidebar .scheduled-item p {
+.main-section-container .sidebar .project p,
+.main-section-container .sidebar .scheduled-item p {
   font-size: medium;
   padding-left: 0.9rem;
 }
-.sidebar .project:hover,
-.sidebar .scheduled-item:hover {
+.main-section-container .sidebar .project:hover,
+.main-section-container .sidebar .scheduled-item:hover {
   cursor: pointer;
   background-color: rgba(153, 153, 153, 0.2039215686);
 }
-.sidebar .scheduled-container {
+.main-section-container .sidebar .scheduled-container {
   margin-top: 20px;
 }
-.sidebar .scheduled-container .scheduled-item {
+.main-section-container .sidebar .scheduled-container .scheduled-item {
   margin: 0.2rem;
   padding-left: 1rem;
 }
-.sidebar .project-container .project-heading {
+.main-section-container .sidebar .project-container .project-heading {
   margin-bottom: 5px;
   margin-left: 20px;
   font-weight: 600;
   font-size: 1.75rem;
 }
-.sidebar .project-container .project {
+.main-section-container .sidebar .project-container .project {
   margin: 0.5rem;
   padding-left: 1rem;
-}
-
-.active {
-  background-color: rgba(153, 153, 153, 0.2039215686);
-  font-weight: 600;
 }
 
 /*# sourceMappingURL=main.css.map*/
