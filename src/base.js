@@ -57,8 +57,12 @@ function createSidebar() {
   projectHeading.textContent = 'Projects'
   projectContainer.appendChild(projectHeading)
 
-  projectContainer.appendChild(createProject('Mow the lawn', 'Get out there'))
-  projectContainer.appendChild(createProject('Count chips', 'If you know, you know'))
+  const addProject = document.createElement('div')
+  addProject.classList.add('add-project')
+
+  projectContainer.appendChild(createProject('Mow the lawn', 'task', 'Get out there'))
+  projectContainer.appendChild(createProject('Count chips', 'task', 'If you know, you know'))
+  projectContainer.appendChild(createProject('Add Project', 'add'))
 
   return sidebarSection;
 }
