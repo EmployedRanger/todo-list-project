@@ -11,6 +11,12 @@ function createHeader() {
   headerDiv.classList.add('header')
   pageBody.appendChild(headerDiv)
 
+  const iconSpan = document.createElement('span');
+  iconSpan.classList.add('material-symbols-outlined');
+  iconSpan.classList.add('makebigger')
+  iconSpan.textContent = 'checklist'
+  headerDiv.appendChild(iconSpan)
+
   const headerTitle = document.createElement('div')
   headerTitle.classList.add('page-title')
   headerTitle.innerHTML = 'Todo List'

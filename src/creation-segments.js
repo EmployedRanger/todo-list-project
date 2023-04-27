@@ -42,8 +42,6 @@ export function createScheduledTask(scheduledName, itemTitle, symbolText) {
   return div;
 }
   
-
-
 export function createProject(projectName, description) {
   const projectDiv = document.createElement('div')
   projectDiv.classList.add('project')
