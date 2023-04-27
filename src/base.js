@@ -5,7 +5,6 @@ import { createScheduledTask, createProject } from './creation-segments';
 // import './css/style.scss'
 
 function createHeader() {
-  console.log('base.js ran')
   const pageBody = document.querySelector('#content')
 
   const headerDiv = document.createElement('div')
@@ -60,26 +59,57 @@ function createSidebar() {
   const addProject = document.createElement('div')
   addProject.classList.add('add-project')
 
-  projectContainer.appendChild(createProject('Mow the lawn', 'task', 'Get out there'))
-  projectContainer.appendChild(createProject('Count chips', 'task', 'If you know, you know'))
+  projectContainer.appendChild(createProject('Mow the lawn', 'task'))
+  projectContainer.appendChild(createProject('Count chips', 'task'))
   projectContainer.appendChild(createProject('Add Project', 'add'))
 
   return sidebarSection;
 }
 
 function createTodo() {
+  const boxContainer = document.createElement('div')
+  boxContainer.classList.add('box-container')
+
   const listContainer = document.createElement('div')
   listContainer.classList.add('list-container')
+  boxContainer.appendChild(listContainer)
 
+  const listTitle = document.createElement('h1')
+  listTitle.classList.add('list-title')
+  listTitle.textContent = 'Todo-list'
+  listContainer.appendChild(listTitle)
 
-  return listContainer;
+  const addTaskButton = document.createElement('button')
+  addTaskButton.classList.add('add-task')
+
+  const buttonText = document.createElement('div')
+  buttonText.classList.add('button-text')
+  buttonText.textContent = 'Add Task'
+
+  const iconSpan = document.createElement('span')
+  iconSpan.classList.add('material-symbols-outlined')
+  iconSpan.textContent = 'add'
+  addTaskButton.appendChild(iconSpan)
+  addTaskButton.appendChild(buttonText)
+  listContainer.appendChild(addTaskButton)
+
+  return boxContainer;
+}
+
+function createMainSection() {
+  const content = document.querySelector('#content');
+  const mainSection = document.createElement('div')
+  mainSection.classList.add('main-section-container')
+
+  mainSection.appendChild(createSidebar());
+  mainSection.appendChild(createTodo());
+  content.appendChild(mainSection);
 }
 
 export default function startup() {
   const content = document.querySelector('#content');
   content.appendChild(createHeader());
-  content.appendChild(createSidebar());
-  content.appendChild(createTodo());
+  createMainSection();
   content.appendChild(createFooter());
   console.log('web after appends')
 

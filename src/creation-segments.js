@@ -42,7 +42,7 @@ export function createScheduledTask(scheduledName, itemTitle, symbolText) {
   return div;
 }
   
-export function createProject(projectName, icon, description) {
+export function createProject(projectName, icon) {
   const projectDiv = document.createElement('div')
   projectDiv.classList.add('project')
 
@@ -54,11 +54,6 @@ export function createProject(projectName, icon, description) {
   projectIcon.textContent = icon
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
-
-  const projectDes = document.createElement('p')
-  projectDes.classList.add('project-description')
-  projectDes.textContent = description
-  //  projectDiv.appendChild(projectDes)
 
   return projectDiv;
 }
