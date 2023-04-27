@@ -1,4 +1,75 @@
+/* $radius is the parameter of the function */
+body,
 html {
   padding: 0;
   margin: 0;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 48px;
+}
+
+.header {
+  width: 100%;
+  max-height: 20%;
+  box-shadow: 0px 5px 5px black;
+  background: rgba(2, 0, 0, 0.836);
+  transition: background 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 1.2rem;
+  color: white;
+  padding: 1em;
+  font-size: 3rem;
+}
+
+.footer {
+  width: 100%;
+  background: rgba(2, 0, 0, 0.9);
+  transition: background 0.5s ease;
+  font-size: 1rem;
+  line-height: 1;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 0px;
+  color: whitesmoke;
+}
+
+.scheduled-item {
+  display: flex;
+  flex-direction: row;
+  margin: 1rem;
+  padding: 0.3rem;
+  padding-left: 1rem;
+  border-radius: 12px;
+  align-items: center;
+}
+.scheduled-item p {
+  font-size: large;
+  padding-left: 10px;
+}
+.scheduled-item:hover {
+  cursor: pointer;
+  background-color: rgba(153, 153, 153, 0.2039215686);
+}
+
+.sidebar {
+  background-color: rgba(153, 153, 153, 0.2039215686);
+  width: 350px;
+  padding: 5px;
+  z-index: 5;
+}
+
+.active {
+  background-color: rgba(153, 153, 153, 0.2039215686);
+  font-weight: 600;
 }/*# sourceMappingURL=style.css.map */
