@@ -45,10 +45,20 @@ export function createScheduledTask(scheduledName, itemTitle, symbolText) {
 export function createProject(projectName, description) {
   const projectDiv = document.createElement('div')
   projectDiv.classList.add('project')
-  projectDiv.textContent = projectName
 
-  const projectDes = document.createElement('div')
+  const projectItem = document.createElement('p')
+  projectItem.textContent = projectName
+  
+  const projectIcon = document.createElement('span')
+  projectIcon.classList.add('material-symbols-outlined')
+  projectIcon.textContent = 'task'
+  projectDiv.appendChild(projectIcon)
+  projectDiv.appendChild(projectItem)
+
+  const projectDes = document.createElement('p')
   projectDes.classList.add('project-description')
   projectDes.textContent = description
-  projectDiv.appendChild(projectDes)
+  //  projectDiv.appendChild(projectDes)
+
+  return projectDiv;
 }

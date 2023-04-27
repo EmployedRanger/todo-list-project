@@ -1,7 +1,7 @@
 /* eslint-disable semi */
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
-import { createScheduledTask } from './creation-segments';
+import { createScheduledTask, createProject } from './creation-segments';
 
 function createHeader() {
   console.log('base.js ran')
@@ -13,7 +13,7 @@ function createHeader() {
 
   const iconSpan = document.createElement('span');
   iconSpan.classList.add('material-symbols-outlined');
-  iconSpan.classList.add('makebigger')
+  iconSpan.classList.add('make-bigger')
   iconSpan.textContent = 'checklist'
   headerDiv.appendChild(iconSpan)
 
@@ -39,38 +39,26 @@ function createFooter() {
 function createSidebar() {
   const sidebarSection = document.createElement('div')
   sidebarSection.classList.add('sidebar')
+  const scheduledContainer = document.createElement('div')
+  scheduledContainer.classList.add('scheduled-container')
+  sidebarSection.appendChild(scheduledContainer)
 
-  sidebarSection.appendChild(createScheduledTask('current-list', 'Current', 'event_upcoming'));
-  sidebarSection.appendChild(createScheduledTask('today-list', 'Today', 'today'));
-  sidebarSection.appendChild(createScheduledTask('week-list', 'This week', 'date_range'));
+  scheduledContainer.appendChild(createScheduledTask('current-list', 'Current', 'event_upcoming'));
+  scheduledContainer.appendChild(createScheduledTask('today-list', 'Today', 'today'));
+  scheduledContainer.appendChild(createScheduledTask('week-list', 'This week', 'date_range'));
 
-  //   sidebarSection.innerHTML = `
-  //     <div id="mySidebar" class="sidebar">
-  //       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  //       <div class="menu-options">
-  //         <hr class="rounded">
-  //         <h2>Scheduled</h2>
-  //         <hr class="rounded">
+  const projectContainer = document.createElement('div')
+  projectContainer.classList.add('project-container')
+  sidebarSection.appendChild(projectContainer)
 
-  //         <hr class="rounded">
-  //         <h2>Projects</h2>
-  //         <hr class="rounded">
-  //         <div class="menu-item">
-  //             <div class="item">Books: </div>
-  //             <div id="counter-quantity">0</div>
-  //         </div>
-  //         <div class="menu-item">
-  //             <div class="item">Books Finished: </div>
-  //             <div id="counter-finished">0</div>
-  //         </div>
-  //         <div class="menu-item">
-  //             <div class="item">Library finished: </div>
-  //             <div id="counter-completed">0</div>
-  //         </div>
-  //         <hr class="rounded outside">
-  //       </div>
-  //     </div>`
-  //   return
+  const projectHeading = document.createElement('p')
+  projectHeading.classList.add('project-heading')
+  projectHeading.textContent = 'Projects'
+  projectContainer.appendChild(projectHeading)
+
+  projectContainer.appendChild(createProject('Mow the lawn', 'Get out there'))
+  projectContainer.appendChild(createProject('Count chips', 'If you know, you know'))
+
   return sidebarSection;
 }
 
