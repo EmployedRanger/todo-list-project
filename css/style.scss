@@ -25,12 +25,15 @@ body {
     background:rgba(2, 0, 0, 0.836);
     transition: background 0.5s ease;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     padding-bottom: 1.2rem;
     color: white;
     padding: 1em;
     font-size: 3rem;
+    .makebigger {
+        scale: 2;
+    }
 }
 
 .footer {
