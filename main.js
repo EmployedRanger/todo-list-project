@@ -86,9 +86,9 @@ function createSidebar() {
   const addProject = document.createElement('div')
   addProject.classList.add('add-project')
 
-  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProject)('Mow the lawn', 'task'))
-  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProject)('Count chips', 'task'))
-  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProject)('Add Project', 'add'))
+  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProject)('Mow the lawn', 'task', ''))
+  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProject)('Count chips', 'task', ''))
+  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProject)('Add Project', 'add', 'yes'))
 
   return sidebarSection;
 }
@@ -125,8 +125,8 @@ function createTodo() {
 
 function createMainSection() {
   const content = document.querySelector('#content');
-  const mainSection = document.createElement('div')
-  mainSection.classList.add('main-section-container')
+  const mainSection = document.createElement('div');
+  mainSection.classList.add('main-section-container');
 
   mainSection.appendChild(createSidebar());
   mainSection.appendChild(createTodo());
@@ -183,7 +183,7 @@ function createTodoItem(taskName, description) {
 }
 
 function createScheduledTask(scheduledName, itemTitle, symbolText) {
-  const div = document.createElement('div');
+  const div = document.createElement('button');
   div.classList.add('scheduled-item');
   div.classList.add(scheduledName);
   div.classList.add('selection-option');
@@ -201,12 +201,19 @@ function createScheduledTask(scheduledName, itemTitle, symbolText) {
   return div;
 }
   
-function createProject(projectName, icon) {
-  const projectDiv = document.createElement('div')
+function createProject(projectName, icon, addProject) {
+  const projectDiv = document.createElement('button')
   projectDiv.classList.add('project')
 
   const projectItem = document.createElement('p')
   projectItem.textContent = projectName
+
+  if (addProject !== '') {
+    projectDiv.classList.add('add-project')
+    // projectDiv.addEventListener('click', (event) => {
+      
+    // })
+  }
   
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')
