@@ -19,7 +19,7 @@ function createHeader() {
 
   const headerTitle = document.createElement('div')
   headerTitle.classList.add('page-title')
-  headerTitle.innerHTML = 'Todo List'
+  headerTitle.innerHTML = 'To-do List'
   headerDiv.appendChild(headerTitle)
 
   return headerDiv;
@@ -76,7 +76,7 @@ function createTodo() {
 
   const listTitle = document.createElement('h1')
   listTitle.classList.add('list-title')
-  listTitle.textContent = 'Todo-list'
+  listTitle.textContent = 'To-do list'
   listContainer.appendChild(listTitle)
 
   const addTaskButton = document.createElement('button')
@@ -112,6 +112,4 @@ export default function startup() {
   createMainSection();
   content.appendChild(createFooter());
   console.log('web after appends')
-
-//   loadHome();
 }

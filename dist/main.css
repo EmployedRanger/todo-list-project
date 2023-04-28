@@ -50,7 +50,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   color: whitesmoke;
   height: 5vh;
   position: absolute;
@@ -66,28 +65,33 @@ body {
   display: flex;
 }
 .main-section-container .box-container {
-  width: 100%;
+  width: 900px;
   display: flex;
   justify-content: center;
-  margin: 2rem;
+  margin: 2rem auto;
 }
 .main-section-container .list-container {
-  width: 900px;
+  width: 100%;
   margin: 0 auto;
-  padding: 10px;
+  padding: 10px 20px;
 }
 .main-section-container .list-container button {
   width: 100%;
   border: none;
   border-radius: 4px;
   text-align: left;
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
   display: flex;
   align-items: center;
 }
+.main-section-container .list-container button:hover {
+  cursor: pointer;
+  background-color: rgba(161, 161, 161, 0.4431372549);
+}
 .main-section-container .sidebar {
   background-color: rgba(153, 153, 153, 0.2039215686);
-  width: 350px;
+  min-width: 250px;
+  width: 300px;
   padding: 10px;
   z-index: 5;
   height: 79vh;
