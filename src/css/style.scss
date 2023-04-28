@@ -65,7 +65,7 @@ body {
     
 
     .box-container {
-        width: 900px;
+        width: 800px;
         @include flex-center-horizontal;
         margin: 2rem auto;
 
@@ -73,11 +73,11 @@ body {
     
     .list-container {
         width: 100%;
+        min-width: 300px;
         margin: 0 auto;
         padding: 10px 20px;
         // display: inline-block;
         button {
-
             width: 100%;
             border: none;
             border-radius: 4px;
@@ -90,7 +90,7 @@ body {
             }
         }
     }
-
+    
     .sidebar {
         background-color: $light-grey;
         min-width: 250px;
@@ -98,14 +98,16 @@ body {
         padding: 10px;
         z-index: 5;
         height: 79vh;
-        // margin: 10px;
         .project,
         .scheduled-item {
+            background: transparent;
             display: flex;
             flex-direction: row;
             align-items: center;
             border-radius: 12px;
             margin: 5px;
+            border: none;
+            width: 90%;
             p {
                 font-size: medium;
                 padding-left: 0.9rem;

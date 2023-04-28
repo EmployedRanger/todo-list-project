@@ -59,9 +59,9 @@ function createSidebar() {
   const addProject = document.createElement('div')
   addProject.classList.add('add-project')
 
-  projectContainer.appendChild(createProject('Mow the lawn', 'task'))
-  projectContainer.appendChild(createProject('Count chips', 'task'))
-  projectContainer.appendChild(createProject('Add Project', 'add'))
+  projectContainer.appendChild(createProject('Mow the lawn', 'task', ''))
+  projectContainer.appendChild(createProject('Count chips', 'task', ''))
+  projectContainer.appendChild(createProject('Add Project', 'add', 'yes'))
 
   return sidebarSection;
 }
@@ -98,8 +98,8 @@ function createTodo() {
 
 function createMainSection() {
   const content = document.querySelector('#content');
-  const mainSection = document.createElement('div')
-  mainSection.classList.add('main-section-container')
+  const mainSection = document.createElement('div');
+  mainSection.classList.add('main-section-container');
 
   mainSection.appendChild(createSidebar());
   mainSection.appendChild(createTodo());

@@ -24,7 +24,7 @@ export function createTodoItem(taskName, description) {
 }
 
 export function createScheduledTask(scheduledName, itemTitle, symbolText) {
-  const div = document.createElement('div');
+  const div = document.createElement('button');
   div.classList.add('scheduled-item');
   div.classList.add(scheduledName);
   div.classList.add('selection-option');
@@ -42,12 +42,19 @@ export function createScheduledTask(scheduledName, itemTitle, symbolText) {
   return div;
 }
   
-export function createProject(projectName, icon) {
-  const projectDiv = document.createElement('div')
+export function createProject(projectName, icon, addProject) {
+  const projectDiv = document.createElement('button')
   projectDiv.classList.add('project')
 
   const projectItem = document.createElement('p')
   projectItem.textContent = projectName
+
+  if (addProject !== '') {
+    projectDiv.classList.add('add-project')
+    // projectDiv.addEventListener('click', (event) => {
+      
+    // })
+  }
   
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')
