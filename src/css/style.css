@@ -1,0 +1,134 @@
+/* $radius is the parameter of the function */
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 48px;
+  overflow: hidden;
+}
+
+.header {
+  width: 100%;
+  max-height: 20%;
+  box-shadow: 0px 5px 5px black;
+  background: rgba(2, 0, 0, 0.836);
+  transition: background 0.5s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 1.2rem;
+  color: white;
+  padding: 1em;
+  font-size: 3rem;
+}
+.header .make-bigger {
+  scale: 2.1;
+  padding-right: 16px;
+  font-weight: 600;
+  margin-left: 50px;
+}
+
+.footer {
+  width: 100%;
+  background: rgba(2, 0, 0, 0.9);
+  transition: background 0.5s ease;
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+  height: 5vh;
+  position: absolute;
+  bottom: 0;
+}
+
+.active {
+  background-color: rgba(153, 153, 153, 0.2039215686);
+  font-weight: 600;
+}
+
+.main-section-container {
+  display: flex;
+}
+.main-section-container .box-container {
+  width: 800px;
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+}
+.main-section-container .list-container {
+  width: 100%;
+  min-width: 300px;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+.main-section-container .list-container button {
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  text-align: left;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.main-section-container .list-container button:hover {
+  cursor: pointer;
+  background-color: rgba(161, 161, 161, 0.4431372549);
+}
+.main-section-container .sidebar {
+  background-color: rgba(153, 153, 153, 0.2039215686);
+  min-width: 250px;
+  width: 300px;
+  padding: 10px;
+  z-index: 5;
+  height: 79vh;
+}
+.main-section-container .sidebar .project,
+.main-section-container .sidebar .scheduled-item {
+  background: transparent;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 12px;
+  margin: 5px;
+  border: none;
+  width: 90%;
+}
+.main-section-container .sidebar .project p,
+.main-section-container .sidebar .scheduled-item p {
+  font-size: medium;
+  padding-left: 0.9rem;
+}
+.main-section-container .sidebar .project:hover,
+.main-section-container .sidebar .scheduled-item:hover {
+  cursor: pointer;
+  background-color: rgba(153, 153, 153, 0.2039215686);
+}
+.main-section-container .sidebar .scheduled-container {
+  margin-top: 20px;
+}
+.main-section-container .sidebar .scheduled-container .scheduled-item {
+  margin: 0.2rem;
+  padding-left: 1rem;
+}
+.main-section-container .sidebar .project-container .project-heading {
+  margin-bottom: 5px;
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+.main-section-container .sidebar .project-container .project {
+  margin: 0.5rem;
+  padding-left: 1rem;
+}/*# sourceMappingURL=style.css.map */
