@@ -16,8 +16,7 @@ export function closePopup() {
 export function submitNewTask() {
   const titleTask = document.querySelector('#input-title').value;
   const descriptionTask = document.querySelector('#input-description').value;
-  //   titleTask.value = titleTask;
-  //   descriptionTask.value = descriptionTask;
+
   console.log(titleTask);
   console.log(descriptionTask);
 }
