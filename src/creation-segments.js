@@ -9,6 +9,7 @@ export default function createParagraph(text) {
 }
 
 export function createTodoItem(taskName, description) {
+  console.log('here')
   const taskItem = document.createElement('div')
   taskItem.classList.add('task-item')
 
@@ -43,18 +44,20 @@ export function createScheduledTask(scheduledName, itemTitle, symbolText) {
 }
   
 export function createProject(projectName, icon, addProject) {
-  const projectDiv = document.createElement('button')
-  projectDiv.classList.add('project')
+  const projectDiv = document.createElement('button');
+  projectDiv.classList.add('project');
 
-  const projectItem = document.createElement('p')
-  projectItem.textContent = projectName
+  const projectItem = document.createElement('p');
+  projectItem.textContent = projectName;
 
   if (addProject !== '') {
-    projectDiv.classList.add('add-project')
+    projectDiv.classList.add('add-project');
     // projectDiv.addEventListener('click', (event) => {
       
     // })
   }
+
+  
   
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')

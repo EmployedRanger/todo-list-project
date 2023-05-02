@@ -25,9 +25,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ startup)
 /* harmony export */ });
 /* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
 /* eslint-disable semi */
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
+// import { sub } from 'date-fns';
+
 
 // import './css/style.scss'
 
@@ -118,7 +121,48 @@ function createTodo() {
   iconSpan.textContent = 'add'
   addTaskButton.appendChild(iconSpan)
   addTaskButton.appendChild(buttonText)
+  addTaskButton.addEventListener('click', () => {
+    ;(0,_utilities__WEBPACK_IMPORTED_MODULE_1__.makeItemActive)();
+  })
   listContainer.appendChild(addTaskButton)
+
+  const addContainer = document.createElement('div')
+  addContainer.classList.add('add-container')
+  const titleContainer = document.createElement('input')
+  titleContainer.setAttribute('id', 'input-title')
+  titleContainer.setAttribute('placeholder', 'Task Title')
+  titleContainer.setAttribute('type', 'text')
+
+  const descriptionContainer = document.createElement('input')
+  descriptionContainer.setAttribute('id', 'input-description')
+  descriptionContainer.setAttribute('placeholder', 'Task description')
+  descriptionContainer.setAttribute('type', 'text')
+
+  const buttonContainer = document.createElement('div')
+  buttonContainer.classList.add('form-container')
+
+  const submitButton = document.createElement('button')
+  submitButton.classList.add('submit-form')
+  submitButton.classList.add('form')
+  submitButton.textContent = 'Add Task'
+  submitButton.addEventListener('click', () => {
+    ;(0,_utilities__WEBPACK_IMPORTED_MODULE_1__.submitNewTask)();
+  })
+  buttonContainer.appendChild(submitButton)
+
+  const cancelButton = document.createElement('button')
+  cancelButton.classList.add('cancel-form')
+  cancelButton.classList.add('form')
+  cancelButton.textContent = 'Cancel'
+  cancelButton.addEventListener('click', () => {
+    ;(0,_utilities__WEBPACK_IMPORTED_MODULE_1__.closePopup)();
+  })
+  buttonContainer.appendChild(cancelButton)
+
+  addContainer.appendChild(titleContainer)
+  addContainer.appendChild(descriptionContainer)
+  addContainer.appendChild(buttonContainer)
+  listContainer.appendChild(addContainer)
 
   return boxContainer;
 }
@@ -168,6 +212,7 @@ function createParagraph(text) {
 }
 
 function createTodoItem(taskName, description) {
+  console.log('here')
   const taskItem = document.createElement('div')
   taskItem.classList.add('task-item')
 
@@ -202,18 +247,20 @@ function createScheduledTask(scheduledName, itemTitle, symbolText) {
 }
   
 function createProject(projectName, icon, addProject) {
-  const projectDiv = document.createElement('button')
-  projectDiv.classList.add('project')
+  const projectDiv = document.createElement('button');
+  projectDiv.classList.add('project');
 
-  const projectItem = document.createElement('p')
-  projectItem.textContent = projectName
+  const projectItem = document.createElement('p');
+  projectItem.textContent = projectName;
 
   if (addProject !== '') {
-    projectDiv.classList.add('add-project')
+    projectDiv.classList.add('add-project');
     // projectDiv.addEventListener('click', (event) => {
       
     // })
   }
+
+  
   
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')
@@ -222,6 +269,45 @@ function createProject(projectName, icon, addProject) {
   projectDiv.appendChild(projectItem)
 
   return projectDiv;
+}
+
+
+/***/ }),
+
+/***/ "./src/utilities.js":
+/*!**************************!*\
+  !*** ./src/utilities.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "closePopup": () => (/* binding */ closePopup),
+/* harmony export */   "makeItemActive": () => (/* binding */ makeItemActive),
+/* harmony export */   "submitNewTask": () => (/* binding */ submitNewTask)
+/* harmony export */ });
+/* eslint-disable no-console */
+function makeItemActive() {
+//   console.log('makeItemActive ran');
+  const item = document.querySelector('.add-container');
+  //  console.log(item);
+  item.style.display = 'flex';
+}
+
+function closePopup() {
+  const cancelForm = document.querySelector('.add-container');
+  //  console.log(closePopup);
+  //  cancelForm.classlist.remove('active');
+  cancelForm.style.display = 'none';
+}
+
+function submitNewTask() {
+  const titleTask = document.querySelector('#input-title').value;
+  const descriptionTask = document.querySelector('#input-description').value;
+  //   titleTask.value = titleTask;
+  //   descriptionTask.value = descriptionTask;
+  console.log(titleTask);
+  console.log(descriptionTask);
 }
 
 

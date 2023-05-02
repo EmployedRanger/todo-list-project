@@ -1,7 +1,9 @@
 /* eslint-disable semi */
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
+// import { sub } from 'date-fns';
 import { createScheduledTask, createProject } from './creation-segments';
+import { makeItemActive, closePopup, submitNewTask } from './utilities';
 // import './css/style.scss'
 
 function createHeader() {
@@ -91,7 +93,48 @@ function createTodo() {
   iconSpan.textContent = 'add'
   addTaskButton.appendChild(iconSpan)
   addTaskButton.appendChild(buttonText)
+  addTaskButton.addEventListener('click', () => {
+    makeItemActive();
+  })
   listContainer.appendChild(addTaskButton)
+
+  const addContainer = document.createElement('div')
+  addContainer.classList.add('add-container')
+  const titleContainer = document.createElement('input')
+  titleContainer.setAttribute('id', 'input-title')
+  titleContainer.setAttribute('placeholder', 'Task Title')
+  titleContainer.setAttribute('type', 'text')
+
+  const descriptionContainer = document.createElement('input')
+  descriptionContainer.setAttribute('id', 'input-description')
+  descriptionContainer.setAttribute('placeholder', 'Task description')
+  descriptionContainer.setAttribute('type', 'text')
+
+  const buttonContainer = document.createElement('div')
+  buttonContainer.classList.add('form-container')
+
+  const submitButton = document.createElement('button')
+  submitButton.classList.add('submit-form')
+  submitButton.classList.add('form')
+  submitButton.textContent = 'Add Task'
+  submitButton.addEventListener('click', () => {
+    submitNewTask();
+  })
+  buttonContainer.appendChild(submitButton)
+
+  const cancelButton = document.createElement('button')
+  cancelButton.classList.add('cancel-form')
+  cancelButton.classList.add('form')
+  cancelButton.textContent = 'Cancel'
+  cancelButton.addEventListener('click', () => {
+    closePopup();
+  })
+  buttonContainer.appendChild(cancelButton)
+
+  addContainer.appendChild(titleContainer)
+  addContainer.appendChild(descriptionContainer)
+  addContainer.appendChild(buttonContainer)
+  listContainer.appendChild(addContainer)
 
   return boxContainer;
 }

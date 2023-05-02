@@ -1,0 +1,113 @@
+[33mcommit 79e65eddd99a3b0104651516900edc0c1c83867a[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Fri Apr 28 19:09:16 2023 -0600
+
+    Started constructor for project
+
+[33mcommit 95f4dff5568b9ee9c4d9d5cbc8bde0386578cc18[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 19:33:52 2023 -0600
+
+    Started appliers functions
+
+[33mcommit baeec0b9827c48f48ad72fed4977b388b9d77993[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 19:21:08 2023 -0600
+
+    Switched divs to buttons
+
+[33mcommit 435e1401ef972d1bbce420a89af78e890e1bf7a6[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 18:15:56 2023 -0600
+
+    Updated formatting to shrink with page size
+
+[33mcommit 76049f800a7d652680c6d37433e87d29498b9db2[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 17:27:15 2023 -0600
+
+    Added main section for list
+
+[33mcommit ed73f58f761e12ad86fea2998eb0d495d9a80a51[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 16:35:32 2023 -0600
+
+    Fixed formatting and modules
+
+[33mcommit 5f3a5c8ad1e36dee152e049fd24131f406f37f7e[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 15:57:07 2023 -0600
+
+    Updated modules
+
+[33mcommit 6765f1bc57223eaa1119d787383e41ed3675b936[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 15:07:28 2023 -0600
+
+    Remove console.log statement
+
+[33mcommit 8019b9ff77aa4789e3be496d3e436e6c459253af[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 15:05:27 2023 -0600
+
+    Removed unneeded line
+
+[33mcommit 0792a228a620f82134f764181e294a34b9f8f7f6[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 14:57:13 2023 -0600
+
+    Update
+
+[33mcommit 0e2dfea2254f7776701b5cafcf0b2300a006687e[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 14:52:12 2023 -0600
+
+    Added formatting
+
+[33mcommit 1ab0ce37b8b7a49cb44b61b9ee5903618faa72cb[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 14:47:26 2023 -0600
+
+    Updated formatting
+
+[33mcommit 5f581d712108bf3ad44f00a4a0d2b9f62300db73[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 14:32:21 2023 -0600
+
+    Moved files
+
+[33mcommit b65b1c97a9de22c8a6a39c481cb0b8902e1f4f84[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Thu Apr 27 13:45:30 2023 -0600
+
+    Updated structure + HTMLWebpackPlugin
+
+[33mcommit 664008988610a49d03eb4c1fb41ce6aadc334fb7[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Wed Apr 26 21:10:08 2023 -0600
+
+    Added project module
+
+[33mcommit 3a4f537873269a7bae10be62c5f6024f8b87bc12[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Wed Apr 26 20:29:49 2023 -0600
+
+    Added icon to main title
+
+[33mcommit d9e7f1011e156bb79c2f2a1af445466e1a9b8214[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Wed Apr 26 20:20:47 2023 -0600
+
+    Added main layout
+
+[33mcommit 2e3d26d8c2021b00036922090950888626542ba7[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Wed Apr 26 14:49:03 2023 -0600
+
+    Initial commit
+
+[33mcommit dbddd7c87980c7bd2421b37a6b82e4e591e4a09c[m
+Author: EmployedRanger <119915465+EmployedRanger@users.noreply.github.com>
+Date:   Wed Apr 26 13:02:35 2023 -0600
+
+    Create README.md

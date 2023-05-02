@@ -54,7 +54,6 @@ body {
     bottom: 0;
 }
 
-
 .active {
     background-color: adjust-hue($color: $light-grey, $degrees: 10);
     font-weight: 600;
@@ -62,35 +61,82 @@ body {
 
 .main-section-container {
     display: flex;
-    
-
     .box-container {
         width: 800px;
         @include flex-center-horizontal;
         margin: 2rem auto;
-
-    }
-    
-    .list-container {
-        width: 100%;
-        min-width: 300px;
-        margin: 0 auto;
-        padding: 10px 20px;
-        // display: inline-block;
-        button {
+        .list-container {
             width: 100%;
-            border: none;
-            border-radius: 4px;
-            text-align: left;
-            padding: 0.25rem 0.5rem;
-            @include flex-center-vertical;
-            &:hover {
-                cursor: pointer;
-                background-color: adjust-hue($color: $dark-grey, $degrees: 200);
+            min-width: 300px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            // display: inline-block;
+            button {
+                width: 100%;
+                border: none;
+                border-radius: 4px;
+                text-align: left;
+                padding: 0.25rem 0.5rem;
+                @include flex-center-vertical;
+                margin-bottom: 12px;
+                &:hover {
+                    cursor: pointer;
+                    background-color: adjust-hue($color: $dark-grey, $degrees: 200);
+                }
+                .button-text {
+                    margin-left: 5px;
+                }
+            }
+            .add-container {
+                display: none;
+                // display: flex;
+                flex-direction: column;
+                #input-title {
+                    height: 2rem;
+                    margin: 5px;
+                    border-radius: 8px;
+                    font-size: 1.2rem;
+                    text-indent: $indent;
+                }
+                #input-description {
+                    height: 4rem;
+                    margin: 5px;
+                    border-radius: 8px;
+                    text-indent: $indent;
+                    word-wrap: normal;
+                }
+                .form-container {
+                    display: flex;
+                    flex-direction: row;
+                    padding: 5px;
+                    // margin: 5px;
+                    height: 4rem;
+                    .form {
+                        border-radius: 4px;
+                        margin: 5px;
+                        @include flex-center-horizontal;
+                        color: white;
+                        font-weight: 900;
+                        font-size: 1.25rem;
+                        word-wrap: normal;
+                    }
+                    .submit-form {
+                        background-color: $submit-green;
+                        &:hover {
+                            background-color: $hover-green;
+                        }
+                    }
+                    .cancel-form {
+                        background-color: $cancel-red;
+                        &:hover {
+                            background-color: $hover-red;
+                        }
+                    }
+                }
             }
         }
     }
-    
+        
     .sidebar {
         background-color: $light-grey;
         min-width: 250px;
@@ -138,4 +184,8 @@ body {
             }
         }
     }
+}
+
+.active {
+    display: flex;
 }
