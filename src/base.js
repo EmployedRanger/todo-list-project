@@ -154,5 +154,4 @@ export default function startup() {
   content.appendChild(createHeader());
   createMainSection();
   content.appendChild(createFooter());
-  console.log('web after appends')
 }
