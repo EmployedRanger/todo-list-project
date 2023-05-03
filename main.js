@@ -212,7 +212,6 @@ function createParagraph(text) {
 }
 
 function createTodoItem(taskName, description) {
-  console.log('here')
   const taskItem = document.createElement('div')
   taskItem.classList.add('task-item')
 
@@ -304,8 +303,7 @@ function closePopup() {
 function submitNewTask() {
   const titleTask = document.querySelector('#input-title').value;
   const descriptionTask = document.querySelector('#input-description').value;
-  //   titleTask.value = titleTask;
-  //   descriptionTask.value = descriptionTask;
+
   console.log(titleTask);
   console.log(descriptionTask);
 }
