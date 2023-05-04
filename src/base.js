@@ -3,7 +3,8 @@
 // import createParagraph from './creation-segments'
 // import { sub } from 'date-fns';
 import { createScheduledTask, createProject } from './creation-segments';
-import { makeItemActive, closePopup, submitNewTask } from './utilities';
+import { makeItemActive, closePopup } from './utilities';
+import { submitNewTask } from './tasks';
 // import './css/style.scss'
 
 function createHeader() {

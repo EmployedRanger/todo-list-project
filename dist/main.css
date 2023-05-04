@@ -187,6 +187,7 @@ body {
 }
 .main-section-container .sidebar .project-container .project .moveable {
   margin-left: auto;
+  padding-right: 8px;
 }
 
 .active {

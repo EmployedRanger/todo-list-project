@@ -49,25 +49,20 @@ export function createProject(projectName, icon, addProject) {
   const projectItem = document.createElement('p');
   projectItem.textContent = projectName;
 
-  if (addProject !== '') {
-    projectDiv.classList.add('add-project');
-    // projectDiv.addEventListener('click', (event) => {
-      
-    // })
-  }
-
-  const moveIcon = document.createElement('span')
-  moveIcon.classList.add('material-symbols-outlined')
-  moveIcon.classList.add('moveable')
-  moveIcon.textContent = 'menu'
-  
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')
   projectIcon.textContent = icon
 
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
-  projectDiv.appendChild(moveIcon)
-
+  
+  if (addProject === '') {
+    projectDiv.classList.add('add-project');
+    const moveIcon = document.createElement('span')
+    moveIcon.classList.add('material-symbols-outlined')
+    moveIcon.classList.add('moveable')
+    moveIcon.textContent = 'dehaze'
+    projectDiv.appendChild(moveIcon)      
+  }
   return projectDiv;
 }

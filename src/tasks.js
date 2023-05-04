@@ -34,3 +34,11 @@ export default class Task {
     return `${month}/${day}/${year}`;
   }
 }
+
+export function submitNewTask() {
+  const titleTask = document.querySelector('#input-title').value;
+  const descriptionTask = document.querySelector('#input-description').value;
+
+  console.log(titleTask);
+  console.log(descriptionTask);
+}
