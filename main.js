@@ -26,10 +26,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
+/* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasks */ "./src/tasks.js");
 /* eslint-disable semi */
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
 // import { sub } from 'date-fns';
+
 
 
 // import './css/style.scss'
@@ -150,7 +152,7 @@ function createTodo() {
   submitButton.classList.add('form')
   submitButton.textContent = 'Add Task'
   submitButton.addEventListener('click', () => {
-    ;(0,_utilities__WEBPACK_IMPORTED_MODULE_1__.submitNewTask)();
+    ;(0,_tasks__WEBPACK_IMPORTED_MODULE_2__.submitNewTask)();
   })
   buttonContainer.appendChild(submitButton)
 
@@ -255,27 +257,81 @@ function createProject(projectName, icon, addProject) {
   const projectItem = document.createElement('p');
   projectItem.textContent = projectName;
 
-  if (addProject !== '') {
-    projectDiv.classList.add('add-project');
-    // projectDiv.addEventListener('click', (event) => {
-      
-    // })
-  }
-
-  const moveIcon = document.createElement('span')
-  moveIcon.classList.add('material-symbols-outlined')
-  moveIcon.classList.add('moveable')
-  moveIcon.textContent = 'menu'
-  
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')
   projectIcon.textContent = icon
 
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
-  projectDiv.appendChild(moveIcon)
-
+  
+  if (addProject === '') {
+    projectDiv.classList.add('add-project');
+    const moveIcon = document.createElement('span')
+    moveIcon.classList.add('material-symbols-outlined')
+    moveIcon.classList.add('moveable')
+    moveIcon.textContent = 'dehaze'
+    projectDiv.appendChild(moveIcon)      
+  }
   return projectDiv;
+}
+
+
+/***/ }),
+
+/***/ "./src/tasks.js":
+/*!**********************!*\
+  !*** ./src/tasks.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Task),
+/* harmony export */   "submitNewTask": () => (/* binding */ submitNewTask)
+/* harmony export */ });
+/* eslint-disable no-console */
+class Task {
+  constructor(name, description, timeline = 'No date') {
+    this.name = name;
+    this.description = description;
+    this.timeline = timeline;
+  }
+
+  setName(name) {
+    console.log('setName in tasks was used');
+    this.name = name;
+  }
+
+  setDescription(description) {
+    console.log('setDescription in tasks was used');
+    this.description = description;
+  }
+
+  setTimeline(timeline) {
+    console.log('setTimeline in tasks was used');
+    this.timeline = timeline;
+  }
+
+  getDate() {
+    console.log('getDate in tasks was used');
+    return this.timeline;
+  }
+
+  getDateFormatted() {
+    console.log('getDateFormatted in tasks was used');
+    const day = this.timeline.split('/')[0];
+    const month = this.timeline.split('/')[1];
+    const year = this.timeline.split('/')[2];
+    return `${month}/${day}/${year}`;
+  }
+}
+
+function submitNewTask() {
+  const titleTask = document.querySelector('#input-title').value;
+  const descriptionTask = document.querySelector('#input-description').value;
+
+  console.log(titleTask);
+  console.log(descriptionTask);
 }
 
 
