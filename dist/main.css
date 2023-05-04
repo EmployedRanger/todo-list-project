@@ -185,6 +185,9 @@ body {
   margin: 0.5rem;
   padding-left: 1rem;
 }
+.main-section-container .sidebar .project-container .project .moveable {
+  margin-left: auto;
+}
 
 .active {
   display: flex;

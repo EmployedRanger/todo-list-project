@@ -179,8 +179,10 @@ body {
             }
             .project {
                 margin: 0.5rem;
-                // padding: 0.05rem;
                 padding-left: 1rem;
+                .moveable {
+                    margin-left: auto;
+                }
             }
         }
     }

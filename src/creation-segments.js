@@ -56,13 +56,18 @@ export function createProject(projectName, icon, addProject) {
     // })
   }
 
-  
+  const moveIcon = document.createElement('span')
+  moveIcon.classList.add('material-symbols-outlined')
+  moveIcon.classList.add('moveable')
+  moveIcon.textContent = 'menu'
   
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')
   projectIcon.textContent = icon
+
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
+  projectDiv.appendChild(moveIcon)
 
   return projectDiv;
 }

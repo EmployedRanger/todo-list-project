@@ -109,6 +109,10 @@ function createTodo() {
   listTitle.textContent = 'To-do list'
   listContainer.appendChild(listTitle)
 
+  const todoSection = document.createElement('div')
+  todoSection.classList.add('Todo-section')
+  listContainer.appendChild(todoSection)
+
   const addTaskButton = document.createElement('button')
   addTaskButton.classList.add('add-task')
 
@@ -258,13 +262,18 @@ function createProject(projectName, icon, addProject) {
     // })
   }
 
-  
+  const moveIcon = document.createElement('span')
+  moveIcon.classList.add('material-symbols-outlined')
+  moveIcon.classList.add('moveable')
+  moveIcon.textContent = 'menu'
   
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')
   projectIcon.textContent = icon
+
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
+  projectDiv.appendChild(moveIcon)
 
   return projectDiv;
 }

@@ -81,6 +81,10 @@ function createTodo() {
   listTitle.textContent = 'To-do list'
   listContainer.appendChild(listTitle)
 
+  const todoSection = document.createElement('div')
+  todoSection.classList.add('Todo-section')
+  listContainer.appendChild(todoSection)
+
   const addTaskButton = document.createElement('button')
   addTaskButton.classList.add('add-task')
 
