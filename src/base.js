@@ -5,7 +5,6 @@
 import { createScheduledTask, createProject } from './creation-segments';
 import { makeItemActive, closePopup } from './utilities';
 import { submitNewTask } from './tasks';
-// import './css/style.scss'
 
 function createHeader() {
   const pageBody = document.querySelector('#content')
@@ -38,6 +37,10 @@ function createFooter() {
   footer.appendChild(copyrightThing);
   return footer;
 }
+
+let currentProjectList = [];
+let todayList = []
+let weekList = []
 
 function createSidebar() {
   const sidebarSection = document.createElement('div')

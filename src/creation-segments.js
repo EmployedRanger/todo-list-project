@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-multiple-empty-lines */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable semi */
@@ -9,6 +10,9 @@ export default function createParagraph(text) {
 }
 
 export function createTodoItem(taskName, description) {
+  const todoSection = document.querySelector('.Todo-section')
+
+  console.log('createTodoItem was called');
   const taskItem = document.createElement('div')
   taskItem.classList.add('task-item')
 
@@ -21,6 +25,12 @@ export function createTodoItem(taskName, description) {
   taskDescription.classList.add('task-description')
   taskDescription.textContent = description
   taskItem.appendChild(taskDescription)
+  todoSection.appendChild(taskItem)
+}
+
+export function TodoTask(title, description) {
+  this.title = title;
+  this.description = description;
 }
 
 export function createScheduledTask(scheduledName, itemTitle, symbolText) {
@@ -56,13 +66,13 @@ export function createProject(projectName, icon, addProject) {
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
   
-  if (addProject === '') {
-    projectDiv.classList.add('add-project');
-    const moveIcon = document.createElement('span')
-    moveIcon.classList.add('material-symbols-outlined')
-    moveIcon.classList.add('moveable')
-    moveIcon.textContent = 'dehaze'
-    projectDiv.appendChild(moveIcon)      
-  }
+  // if (addProject === '') {
+  //   projectDiv.classList.add('add-project');
+  //   const moveIcon = document.createElement('span')
+  //   moveIcon.classList.add('material-symbols-outlined')
+  //   moveIcon.classList.add('moveable')
+  //   moveIcon.textContent = 'dehaze'
+  //   projectDiv.appendChild(moveIcon)      
+  // }
   return projectDiv;
 }

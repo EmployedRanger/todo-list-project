@@ -1,3 +1,5 @@
+import { createTodoItem } from "./creation-segments";
+
 /* eslint-disable no-console */
 export default class Task {
   constructor(name, description, timeline = 'No date') {
@@ -39,6 +41,7 @@ export function submitNewTask() {
   const titleTask = document.querySelector('#input-title').value;
   const descriptionTask = document.querySelector('#input-description').value;
 
+  createTodoItem(titleTask, descriptionTask);
   console.log(titleTask);
   console.log(descriptionTask);
 }

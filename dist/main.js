@@ -34,7 +34,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import './css/style.scss'
 
 function createHeader() {
   const pageBody = document.querySelector('#content')
@@ -67,6 +66,10 @@ function createFooter() {
   footer.appendChild(copyrightThing);
   return footer;
 }
+
+let currentProjectList = [];
+let todayList = []
+let weekList = []
 
 function createSidebar() {
   const sidebarSection = document.createElement('div')
@@ -201,11 +204,13 @@ function startup() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TodoTask": () => (/* binding */ TodoTask),
 /* harmony export */   "createProject": () => (/* binding */ createProject),
 /* harmony export */   "createScheduledTask": () => (/* binding */ createScheduledTask),
 /* harmony export */   "createTodoItem": () => (/* binding */ createTodoItem),
 /* harmony export */   "default": () => (/* binding */ createParagraph)
 /* harmony export */ });
+/* eslint-disable no-console */
 /* eslint-disable no-multiple-empty-lines */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable semi */
@@ -217,6 +222,9 @@ function createParagraph(text) {
 }
 
 function createTodoItem(taskName, description) {
+  const todoSection = document.querySelector('.Todo-section')
+
+  console.log('createTodoItem was called');
   const taskItem = document.createElement('div')
   taskItem.classList.add('task-item')
 
@@ -229,6 +237,12 @@ function createTodoItem(taskName, description) {
   taskDescription.classList.add('task-description')
   taskDescription.textContent = description
   taskItem.appendChild(taskDescription)
+  todoSection.appendChild(taskItem)
+}
+
+function TodoTask(title, description) {
+  this.title = title;
+  this.description = description;
 }
 
 function createScheduledTask(scheduledName, itemTitle, symbolText) {
@@ -264,14 +278,14 @@ function createProject(projectName, icon, addProject) {
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
   
-  if (addProject === '') {
-    projectDiv.classList.add('add-project');
-    const moveIcon = document.createElement('span')
-    moveIcon.classList.add('material-symbols-outlined')
-    moveIcon.classList.add('moveable')
-    moveIcon.textContent = 'dehaze'
-    projectDiv.appendChild(moveIcon)      
-  }
+  // if (addProject === '') {
+  //   projectDiv.classList.add('add-project');
+  //   const moveIcon = document.createElement('span')
+  //   moveIcon.classList.add('material-symbols-outlined')
+  //   moveIcon.classList.add('moveable')
+  //   moveIcon.textContent = 'dehaze'
+  //   projectDiv.appendChild(moveIcon)      
+  // }
   return projectDiv;
 }
 
@@ -289,6 +303,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Task),
 /* harmony export */   "submitNewTask": () => (/* binding */ submitNewTask)
 /* harmony export */ });
+/* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
+
+
 /* eslint-disable no-console */
 class Task {
   constructor(name, description, timeline = 'No date') {
@@ -330,6 +347,7 @@ function submitNewTask() {
   const titleTask = document.querySelector('#input-title').value;
   const descriptionTask = document.querySelector('#input-description').value;
 
+  (0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createTodoItem)(titleTask, descriptionTask);
   console.log(titleTask);
   console.log(descriptionTask);
 }
@@ -346,8 +364,7 @@ function submitNewTask() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "closePopup": () => (/* binding */ closePopup),
-/* harmony export */   "makeItemActive": () => (/* binding */ makeItemActive),
-/* harmony export */   "submitNewTask": () => (/* binding */ submitNewTask)
+/* harmony export */   "makeItemActive": () => (/* binding */ makeItemActive)
 /* harmony export */ });
 /* eslint-disable no-console */
 function makeItemActive() {
@@ -362,14 +379,6 @@ function closePopup() {
   //  console.log(closePopup);
   //  cancelForm.classlist.remove('active');
   cancelForm.style.display = 'none';
-}
-
-function submitNewTask() {
-  const titleTask = document.querySelector('#input-title').value;
-  const descriptionTask = document.querySelector('#input-description').value;
-
-  console.log(titleTask);
-  console.log(descriptionTask);
 }
 
 
