@@ -28,9 +28,19 @@ export function createTodoItem(taskName, description) {
   todoSection.appendChild(taskItem)
 }
 
-export function TodoTask(title, description) {
-  this.title = title;
-  this.description = description;
+export class TodoTask {
+  constructor(title, description) {
+    this.title = title;
+    this.description = description;
+  }
+}
+
+function updateProjectList() {
+  
+}
+
+function updateTasks() {
+
 }
 
 export function createScheduledTask(scheduledName, itemTitle, symbolText) {
@@ -53,6 +63,7 @@ export function createScheduledTask(scheduledName, itemTitle, symbolText) {
 }
   
 export function createProject(projectName, icon, addProject) {
+  let projectName = [];
   const projectDiv = document.createElement('button');
   projectDiv.classList.add('project');
 

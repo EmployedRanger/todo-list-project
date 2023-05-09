@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./src/css/style.scss":
@@ -8,6 +7,7 @@
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
@@ -20,6 +20,7 @@ __webpack_require__.r(__webpack_exports__);
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startup)
@@ -200,95 +201,9 @@ function startup() {
 /*!**********************************!*\
   !*** ./src/creation-segments.js ***!
   \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TodoTask": () => (/* binding */ TodoTask),
-/* harmony export */   "createProject": () => (/* binding */ createProject),
-/* harmony export */   "createScheduledTask": () => (/* binding */ createScheduledTask),
-/* harmony export */   "createTodoItem": () => (/* binding */ createTodoItem),
-/* harmony export */   "default": () => (/* binding */ createParagraph)
-/* harmony export */ });
-/* eslint-disable no-console */
-/* eslint-disable no-multiple-empty-lines */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable semi */
-function createParagraph(text) {
-  const paragraph = document.createElement('p');
-  paragraph.classList.add('paragraph');
-  paragraph.textContent = text;
-  return paragraph;
-}
-
-function createTodoItem(taskName, description) {
-  const todoSection = document.querySelector('.Todo-section')
-
-  console.log('createTodoItem was called');
-  const taskItem = document.createElement('div')
-  taskItem.classList.add('task-item')
-
-  const taskTitle = document.createElement('div')
-  taskTitle.classList.add('task-name')
-  taskTitle.textContent = taskName
-  taskItem.appendChild(taskTitle)
-
-  const taskDescription = document.createElement('div')
-  taskDescription.classList.add('task-description')
-  taskDescription.textContent = description
-  taskItem.appendChild(taskDescription)
-  todoSection.appendChild(taskItem)
-}
-
-function TodoTask(title, description) {
-  this.title = title;
-  this.description = description;
-}
-
-function createScheduledTask(scheduledName, itemTitle, symbolText) {
-  const div = document.createElement('button');
-  div.classList.add('scheduled-item');
-  div.classList.add(scheduledName);
-  div.classList.add('selection-option');
-  
-  const iconSpan = document.createElement('span');
-  iconSpan.classList.add('material-symbols-outlined');
-  iconSpan.textContent = symbolText;
-  
-  const itemText = document.createElement('p');
-  itemText.textContent = itemTitle;
-  
-  div.appendChild(iconSpan);
-  div.appendChild(itemText);
-  
-  return div;
-}
-  
-function createProject(projectName, icon, addProject) {
-  const projectDiv = document.createElement('button');
-  projectDiv.classList.add('project');
-
-  const projectItem = document.createElement('p');
-  projectItem.textContent = projectName;
-
-  const projectIcon = document.createElement('span')
-  projectIcon.classList.add('material-symbols-outlined')
-  projectIcon.textContent = icon
-
-  projectDiv.appendChild(projectIcon)
-  projectDiv.appendChild(projectItem)
-  
-  // if (addProject === '') {
-  //   projectDiv.classList.add('add-project');
-  //   const moveIcon = document.createElement('span')
-  //   moveIcon.classList.add('material-symbols-outlined')
-  //   moveIcon.classList.add('moveable')
-  //   moveIcon.textContent = 'dehaze'
-  //   projectDiv.appendChild(moveIcon)      
-  // }
-  return projectDiv;
-}
-
+throw new Error("Module parse failed: Identifier 'projectName' has already been declared (66:6)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n|   \n| export function createProject(projectName, icon, addProject) {\n>   let projectName = [];\n|   const projectDiv = document.createElement('button');\n|   projectDiv.classList.add('project');");
 
 /***/ }),
 
@@ -298,6 +213,7 @@ function createProject(projectName, icon, addProject) {
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Task),
@@ -361,6 +277,7 @@ function submitNewTask() {
   \**************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "closePopup": () => (/* binding */ closePopup),
@@ -441,8 +358,9 @@ function closePopup() {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
+"use strict";
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/

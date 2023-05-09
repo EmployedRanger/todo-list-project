@@ -1,4 +1,4 @@
-import { createTodoItem } from "./creation-segments";
+import { createTodoItem } from './creation-segments';
 
 /* eslint-disable no-console */
 export default class Task {
