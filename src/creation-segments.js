@@ -62,7 +62,14 @@ export function createTodoItem(taskName, description) {
   const taskDescription = document.createElement('div')
   taskDescription.classList.add('task-description')
   taskDescription.textContent = description
+  
+  const taskIcon = document.createElement('span')
+  taskIcon.classList.add('material-symbols-outlined')
+  taskIcon.classList.add('icon-button')
+  taskIcon.textContent = 'check_circle'
+
   taskItem.appendChild(taskDescription)
+  taskItem.appendChild(taskIcon)
   todoSection.appendChild(taskItem)
 }
 

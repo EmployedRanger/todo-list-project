@@ -44,11 +44,13 @@ export function createForm() {
   const titleContainer = document.createElement('input')
   titleContainer.setAttribute('id', 'input-title')
   titleContainer.setAttribute('placeholder', 'Task Title')
+  titleContainer.setAttribute('maxlength', '25')
   titleContainer.setAttribute('type', 'text')
 
   const descriptionContainer = document.createElement('input')
   descriptionContainer.setAttribute('id', 'input-description')
   descriptionContainer.setAttribute('placeholder', 'Task description')
+  descriptionContainer.setAttribute('maxlength', '60')
   descriptionContainer.setAttribute('type', 'text')
 
   const buttonContainer = document.createElement('div')
@@ -124,7 +126,7 @@ function createTodo() {
 
   const listTitle = document.createElement('h1')
   listTitle.classList.add('list-title')
-  listTitle.textContent = 'To-do list'
+  listTitle.textContent = 'Current to-do list'
   listContainer.appendChild(listTitle)
 
   const todoSection = document.createElement('div')

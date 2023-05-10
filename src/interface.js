@@ -44,7 +44,7 @@ export default class UserInterface {
 
     const currentProject = getCurrentProject();
     if (currentProject) {
-      console.log('if statement in submitNewTask ran')
+      console.log('if statement in submitNewTask ran');
       const newTask = createTask(titleTask, descriptionTask);
       currentProject.addTask(newTask);
       displayTasks(currentProject.getTasks());
