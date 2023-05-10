@@ -606,11 +606,13 @@ function createForm() {
   const titleContainer = document.createElement('input')
   titleContainer.setAttribute('id', 'input-title')
   titleContainer.setAttribute('placeholder', 'Task Title')
+  titleContainer.setAttribute('maxlength', '25')
   titleContainer.setAttribute('type', 'text')
 
   const descriptionContainer = document.createElement('input')
   descriptionContainer.setAttribute('id', 'input-description')
   descriptionContainer.setAttribute('placeholder', 'Task description')
+  descriptionContainer.setAttribute('maxlength', '60')
   descriptionContainer.setAttribute('type', 'text')
 
   const buttonContainer = document.createElement('div')
@@ -686,7 +688,7 @@ function createTodo() {
 
   const listTitle = document.createElement('h1')
   listTitle.classList.add('list-title')
-  listTitle.textContent = 'To-do list'
+  listTitle.textContent = 'Current to-do list'
   listContainer.appendChild(listTitle)
 
   const todoSection = document.createElement('div')
@@ -816,7 +818,14 @@ function createTodoItem(taskName, description) {
   const taskDescription = document.createElement('div')
   taskDescription.classList.add('task-description')
   taskDescription.textContent = description
+  
+  const taskIcon = document.createElement('span')
+  taskIcon.classList.add('material-symbols-outlined')
+  taskIcon.classList.add('icon-button')
+  taskIcon.textContent = 'check_circle'
+
   taskItem.appendChild(taskDescription)
+  taskItem.appendChild(taskIcon)
   todoSection.appendChild(taskItem)
 }
 
@@ -950,7 +959,7 @@ class UserInterface {
 
     const currentProject = (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.getCurrentProject)();
     if (currentProject) {
-      console.log('if statement in submitNewTask ran')
+      console.log('if statement in submitNewTask ran');
       const newTask = (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.createTask)(titleTask, descriptionTask);
       currentProject.addTask(newTask);
       (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.displayTasks)(currentProject.getTasks());

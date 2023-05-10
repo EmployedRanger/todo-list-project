@@ -68,13 +68,39 @@ body {
   width: 800px;
   display: flex;
   justify-content: center;
-  margin: 2rem auto;
+  margin: 2rem;
 }
 .main-section-container .box-container .list-container {
   width: 100%;
   min-width: 300px;
   margin: 0 auto;
   padding: 10px 20px;
+}
+.main-section-container .box-container .list-container .Todo-section .task-item {
+  border: none;
+  border-radius: 4px;
+  text-align: left;
+  padding: 0.5rem 0.5rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgba(153, 153, 153, 0.2039215686);
+}
+.main-section-container .box-container .list-container .Todo-section .task-item .task-name {
+  font-size: 1.3rem;
+}
+.main-section-container .box-container .list-container .Todo-section .task-item .task-description {
+  left: 20px;
+  overflow: hidden;
+}
+.main-section-container .box-container .list-container .Todo-section .task-item:hover {
+  background-color: rgba(161, 161, 161, 0.4431372549);
+}
+.main-section-container .box-container .list-container .Todo-section .task-item .icon-button:hover {
+  scale: 1.2;
+  cursor: pointer;
 }
 .main-section-container .box-container .list-container button {
   width: 100%;
