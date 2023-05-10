@@ -12,3 +12,13 @@ export function closePopup() {
   //  cancelForm.classlist.remove('active');
   cancelForm.style.display = 'none';
 }
+
+export function makeProjectFormActive() {
+  const projectAdd = document.querySelector('.project-form-container');
+  projectAdd.style.display = 'flex';
+}
+
+export function closeProjectFormPopup() {
+  const cancelForm = document.querySelector('.project-form-container');
+  cancelForm.style.display = 'none';
+}

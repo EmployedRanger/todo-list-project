@@ -1,11 +1,10 @@
 //     import pullUpCurrentList from ****;
 
-// export function applyClicksButtons() {
-//   const currentList = document.getElementsByClassName('current-list');
-//   currentList.addEventListener('click', () => {
-//     pullUpCurrentList
-//         }
-//     );
+// export default function applyClicksButtons() {
+//     const addProjectButton = document.querySelector('.add-project');
+//     addProjectButton.addEventListener('click', () => {
+//         submitNewTask();
+//     })
 // }
 
 // export function doSomething() {

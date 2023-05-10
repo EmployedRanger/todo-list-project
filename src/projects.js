@@ -66,3 +66,9 @@ export default class Project {
     });
   }
 }
+
+export function createProjectMain(title) {
+  console.log('createProject inside projects.js was called');
+  const project = new Project(title);
+  return project;
+}

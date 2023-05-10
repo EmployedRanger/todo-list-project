@@ -2,9 +2,9 @@
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
 // import { sub } from 'date-fns';
-import { createScheduledTask, createProject } from './creation-segments';
+import { createScheduledProject, createProjectCreation, createFormProject } from './creation-segments';
 import { makeItemActive, closePopup } from './utilities';
-import { submitNewTask } from './tasks';
+import { applyClicksButtons } from './interface';
 
 function createHeader() {
   const pageBody = document.querySelector('#content')
@@ -38,6 +38,43 @@ function createFooter() {
   return footer;
 }
 
+export function createForm() {
+  const addContainer = document.createElement('div')
+  addContainer.classList.add('add-container')
+  const titleContainer = document.createElement('input')
+  titleContainer.setAttribute('id', 'input-title')
+  titleContainer.setAttribute('placeholder', 'Task Title')
+  titleContainer.setAttribute('type', 'text')
+
+  const descriptionContainer = document.createElement('input')
+  descriptionContainer.setAttribute('id', 'input-description')
+  descriptionContainer.setAttribute('placeholder', 'Task description')
+  descriptionContainer.setAttribute('type', 'text')
+
+  const buttonContainer = document.createElement('div')
+  buttonContainer.classList.add('form-container')
+
+  const submitButton = document.createElement('button')
+  submitButton.classList.add('submit-form')
+  submitButton.classList.add('form')
+  submitButton.textContent = 'Add Task'
+  buttonContainer.appendChild(submitButton)
+
+  const cancelButton = document.createElement('button')
+  cancelButton.classList.add('cancel-form')
+  cancelButton.classList.add('form')
+  cancelButton.textContent = 'Cancel'
+  cancelButton.addEventListener('click', () => {
+    closePopup();
+  })
+  buttonContainer.appendChild(cancelButton)
+
+  addContainer.appendChild(titleContainer)
+  addContainer.appendChild(descriptionContainer)
+  addContainer.appendChild(buttonContainer)
+  return addContainer;
+}
+
 let currentProjectList = [];
 let todayList = []
 let weekList = []
@@ -49,9 +86,9 @@ function createSidebar() {
   scheduledContainer.classList.add('scheduled-container')
   sidebarSection.appendChild(scheduledContainer)
 
-  scheduledContainer.appendChild(createScheduledTask('current-list', 'Current', 'event_upcoming'));
-  scheduledContainer.appendChild(createScheduledTask('today-list', 'Today', 'today'));
-  scheduledContainer.appendChild(createScheduledTask('week-list', 'This week', 'date_range'));
+  scheduledContainer.appendChild(createScheduledProject('current-list', 'Current', 'event_upcoming'));
+  scheduledContainer.appendChild(createScheduledProject('today-list', 'Today', 'today'));
+  scheduledContainer.appendChild(createScheduledProject('week-list', 'This week', 'date_range'));
 
   const projectContainer = document.createElement('div')
   projectContainer.classList.add('project-container')
@@ -62,12 +99,17 @@ function createSidebar() {
   projectHeading.textContent = 'Projects'
   projectContainer.appendChild(projectHeading)
 
+  const listContainer = document.createElement('div')
+  listContainer.classList.add('list-container-projects')
+  projectContainer.appendChild(listContainer)
+
   const addProject = document.createElement('div')
   addProject.classList.add('add-project')
 
-  projectContainer.appendChild(createProject('Mow the lawn', 'task', ''))
-  projectContainer.appendChild(createProject('Count chips', 'task', ''))
-  projectContainer.appendChild(createProject('Add Project', 'add', 'yes'))
+  listContainer.appendChild(createProjectCreation('Mow the lawn', 'task', ''))
+  listContainer.appendChild(createProjectCreation('Count chips', 'task', ''))
+  projectContainer.appendChild(createProjectCreation('Add Project', 'add', 'yes'))
+  projectContainer.appendChild(createFormProject())
 
   return sidebarSection;
 }
@@ -106,43 +148,7 @@ function createTodo() {
   })
   listContainer.appendChild(addTaskButton)
 
-  const addContainer = document.createElement('div')
-  addContainer.classList.add('add-container')
-  const titleContainer = document.createElement('input')
-  titleContainer.setAttribute('id', 'input-title')
-  titleContainer.setAttribute('placeholder', 'Task Title')
-  titleContainer.setAttribute('type', 'text')
-
-  const descriptionContainer = document.createElement('input')
-  descriptionContainer.setAttribute('id', 'input-description')
-  descriptionContainer.setAttribute('placeholder', 'Task description')
-  descriptionContainer.setAttribute('type', 'text')
-
-  const buttonContainer = document.createElement('div')
-  buttonContainer.classList.add('form-container')
-
-  const submitButton = document.createElement('button')
-  submitButton.classList.add('submit-form')
-  submitButton.classList.add('form')
-  submitButton.textContent = 'Add Task'
-  submitButton.addEventListener('click', () => {
-    submitNewTask();
-  })
-  buttonContainer.appendChild(submitButton)
-
-  const cancelButton = document.createElement('button')
-  cancelButton.classList.add('cancel-form')
-  cancelButton.classList.add('form')
-  cancelButton.textContent = 'Cancel'
-  cancelButton.addEventListener('click', () => {
-    closePopup();
-  })
-  buttonContainer.appendChild(cancelButton)
-
-  addContainer.appendChild(titleContainer)
-  addContainer.appendChild(descriptionContainer)
-  addContainer.appendChild(buttonContainer)
-  listContainer.appendChild(addContainer)
+  listContainer.appendChild(createForm());
 
   return boxContainer;
 }
@@ -162,4 +168,5 @@ export default function startup() {
   content.appendChild(createHeader());
   createMainSection();
   content.appendChild(createFooter());
+  applyClicksButtons();
 }

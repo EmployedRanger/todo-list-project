@@ -181,13 +181,55 @@ body {
   font-weight: 600;
   font-size: 1.75rem;
 }
+.main-section-container .sidebar .project-container .project-form-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+.main-section-container .sidebar .project-container .project-form-container .form-container {
+  border-radius: 4px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-weight: 900;
+  font-size: 1.25rem;
+  word-wrap: normal;
+}
+.main-section-container .sidebar .project-container .project-form-container .form {
+  border: none;
+  border-radius: 8px;
+  margin: 5px;
+  width: 8rem;
+  height: 3rem;
+  color: white;
+  font-weight: 700;
+}
+.main-section-container .sidebar .project-container .project-form-container .form:hover {
+  cursor: pointer;
+}
+.main-section-container .sidebar .project-container .project-form-container #project-title-input {
+  border-radius: 8px;
+  padding: 0.1rem;
+  text-indent: 4px;
+  font-size: 1.2rem;
+  width: 85%;
+}
+.main-section-container .sidebar .project-container .project-form-container .submit-new-project {
+  background-color: rgba(70, 185, 60, 0.6509803922);
+}
+.main-section-container .sidebar .project-container .project-form-container .submit-new-project:hover {
+  background-color: rgba(70, 185, 60, 0.9450980392);
+}
+.main-section-container .sidebar .project-container .project-form-container .cancel-form {
+  background-color: rgba(231, 38, 38, 0.6588235294);
+}
+.main-section-container .sidebar .project-container .project-form-container .cancel-form:hover {
+  background-color: rgba(231, 38, 38, 0.8823529412);
+}
 .main-section-container .sidebar .project-container .project {
   margin: 0.5rem;
   padding-left: 1rem;
-}
-.main-section-container .sidebar .project-container .project .moveable {
-  margin-left: auto;
-  padding-right: 8px;
 }
 
 .active {
