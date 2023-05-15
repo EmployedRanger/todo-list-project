@@ -612,7 +612,7 @@ function createForm() {
   const descriptionContainer = document.createElement('input')
   descriptionContainer.setAttribute('id', 'input-description')
   descriptionContainer.setAttribute('placeholder', 'Task description')
-  descriptionContainer.setAttribute('maxlength', '60')
+  descriptionContainer.setAttribute('maxlength', '50')
   descriptionContainer.setAttribute('type', 'text')
 
   const buttonContainer = document.createElement('div')

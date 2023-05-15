@@ -63,16 +63,17 @@ body {
 
 .main-section-container {
   display: flex;
+  width: 100%;
 }
 .main-section-container .box-container {
-  width: 800px;
   display: flex;
   justify-content: center;
+  min-width: 300px;
+  width: 100%;
   margin: 2rem;
 }
 .main-section-container .box-container .list-container {
   width: 100%;
-  min-width: 300px;
   margin: 0 auto;
   padding: 10px 20px;
 }

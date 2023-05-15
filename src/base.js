@@ -2,7 +2,10 @@
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
 // import { sub } from 'date-fns';
-import { createScheduledProject, createProjectCreation, createFormProject } from './creation-segments';
+import { createScheduledProject,
+  createProjectCreation,
+  createFormProject,
+} from './creation-segments';
 import { makeItemActive, closePopup } from './utilities';
 import { applyClicksButtons } from './interface';
 
@@ -50,7 +53,7 @@ export function createForm() {
   const descriptionContainer = document.createElement('input')
   descriptionContainer.setAttribute('id', 'input-description')
   descriptionContainer.setAttribute('placeholder', 'Task description')
-  descriptionContainer.setAttribute('maxlength', '60')
+  descriptionContainer.setAttribute('maxlength', '50')
   descriptionContainer.setAttribute('type', 'text')
 
   const buttonContainer = document.createElement('div')
