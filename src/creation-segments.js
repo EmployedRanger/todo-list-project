@@ -5,13 +5,26 @@
 
 import { closeProjectFormPopup, makeProjectFormActive } from './utilities';
 import Project from './projects';
+import { switchProject } from './tasks';
 
-export default function createParagraph(text) {
-  const paragraph = document.createElement('p');
-  paragraph.classList.add('paragraph');
-  paragraph.textContent = text;
-  return paragraph;
+export class Task {
+  constructor(name, description, timeline = 'No date') {
+    this.name = name;
+    this.description = description;
+    this.timeline = timeline;
+  }
+
+  setName(name) {
+    console.log('setName in tasks was used');
+    this.name = name;
+  }
+
+  setDescription(description) {
+    console.log('setDescription in tasks was used');
+    this.description = description;
+  }
 }
+
 
 export function createFormProject() {
   console.log('createFormProject ran')
@@ -55,6 +68,9 @@ export function createTodoItem(taskName, description) {
   const taskItem = document.createElement('div')
   taskItem.classList.add('task-item')
 
+  const task = new Task(taskName, description);
+  console.log(task);
+
   const taskTitle = document.createElement('div')
   taskTitle.classList.add('task-name')
   taskTitle.textContent = taskName
@@ -74,20 +90,13 @@ export function createTodoItem(taskName, description) {
   todoSection.appendChild(taskItem)
 }
 
-export class TodoTask {
-  constructor(title, description) {
-    this.title = title;
-    this.description = description;
-  }
-}
-
-function updateProjectList() {
+// function updateProjectList() {
   
-}
+// }
 
-function updateTasks() {
+// function updateTasks() {
 
-}
+// }
 
 export function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const div = document.createElement('button');
@@ -99,6 +108,9 @@ export function createScheduledProject(scheduledName, itemTitle, symbolText) {
   iconSpan.classList.add('material-symbols-outlined');
   iconSpan.textContent = symbolText;
   const project = new Project(scheduledName);
+  div.addEventListener('click', () => {
+    switchProject(scheduledName);
+  });
   console.log(project);
   
   const itemText = document.createElement('p');

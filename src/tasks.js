@@ -1,4 +1,4 @@
-import { createTodoItem } from './creation-segments';
+// import { createTodoItem } from './creation-segments';
 import { closePopup } from './utilities';
 
 /* eslint-disable no-console */
@@ -86,6 +86,7 @@ export function switchProject(project) {
   console.log('switchProject was called');
   currentProject = project;
   const projectTasks = project.getTasks();
+  console.log(`projectTasks = ${projectTasks}`);
   displayTasks(projectTasks);
 }
 

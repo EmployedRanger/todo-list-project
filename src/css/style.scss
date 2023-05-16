@@ -54,11 +54,6 @@ body {
     bottom: 0;
 }
 
-.active {
-    background-color: adjust-hue($color: $light-grey, $degrees: 10);
-    font-weight: 600;
-}
-
 .main-section-container {
     display: flex;
     width: 100%;
@@ -200,6 +195,10 @@ body {
             .scheduled-item {
                 margin: 0.2rem;
                 padding-left: 1rem;
+            }
+            .active {
+                background-color: adjust-hue($color: $light-grey, $degrees: 10);
+                font-weight: 600;
             }
         }
         .project-container {
