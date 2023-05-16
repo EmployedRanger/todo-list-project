@@ -748,15 +748,15 @@ function startup() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TodoTask": () => (/* binding */ TodoTask),
+/* harmony export */   "Task": () => (/* binding */ Task),
 /* harmony export */   "createFormProject": () => (/* binding */ createFormProject),
 /* harmony export */   "createProjectCreation": () => (/* binding */ createProjectCreation),
 /* harmony export */   "createScheduledProject": () => (/* binding */ createScheduledProject),
-/* harmony export */   "createTodoItem": () => (/* binding */ createTodoItem),
-/* harmony export */   "default": () => (/* binding */ createParagraph)
+/* harmony export */   "createTodoItem": () => (/* binding */ createTodoItem)
 /* harmony export */ });
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
 /* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
+/* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasks */ "./src/tasks.js");
 /* eslint-disable no-console */
 /* eslint-disable no-multiple-empty-lines */
 /* eslint-disable no-trailing-spaces */
@@ -765,12 +765,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function createParagraph(text) {
-  const paragraph = document.createElement('p');
-  paragraph.classList.add('paragraph');
-  paragraph.textContent = text;
-  return paragraph;
+
+class Task {
+  constructor(name, description, timeline = 'No date') {
+    this.name = name;
+    this.description = description;
+    this.timeline = timeline;
+  }
+
+  setName(name) {
+    console.log('setName in tasks was used');
+    this.name = name;
+  }
+
+  setDescription(description) {
+    console.log('setDescription in tasks was used');
+    this.description = description;
+  }
 }
+
 
 function createFormProject() {
   console.log('createFormProject ran')
@@ -814,6 +827,9 @@ function createTodoItem(taskName, description) {
   const taskItem = document.createElement('div')
   taskItem.classList.add('task-item')
 
+  const task = new Task(taskName, description);
+  console.log(task);
+
   const taskTitle = document.createElement('div')
   taskTitle.classList.add('task-name')
   taskTitle.textContent = taskName
@@ -833,20 +849,13 @@ function createTodoItem(taskName, description) {
   todoSection.appendChild(taskItem)
 }
 
-class TodoTask {
-  constructor(title, description) {
-    this.title = title;
-    this.description = description;
-  }
-}
-
-function updateProjectList() {
+// function updateProjectList() {
   
-}
+// }
 
-function updateTasks() {
+// function updateTasks() {
 
-}
+// }
 
 function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const div = document.createElement('button');
@@ -858,6 +867,9 @@ function createScheduledProject(scheduledName, itemTitle, symbolText) {
   iconSpan.classList.add('material-symbols-outlined');
   iconSpan.textContent = symbolText;
   const project = new _projects__WEBPACK_IMPORTED_MODULE_1__["default"](scheduledName);
+  div.addEventListener('click', () => {
+    (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(scheduledName);
+  });
   console.log(project);
   
   const itemText = document.createElement('p');
@@ -1105,9 +1117,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getCurrentProject": () => (/* binding */ getCurrentProject),
 /* harmony export */   "switchProject": () => (/* binding */ switchProject)
 /* harmony export */ });
-/* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
-
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
+// import { createTodoItem } from './creation-segments';
 
 
 /* eslint-disable no-console */
@@ -1195,6 +1206,7 @@ function switchProject(project) {
   console.log('switchProject was called');
   currentProject = project;
   const projectTasks = project.getTasks();
+  console.log(`projectTasks = ${projectTasks}`);
   displayTasks(projectTasks);
 }
 
