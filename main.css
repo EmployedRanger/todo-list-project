@@ -146,7 +146,7 @@ body {
 }
 .main-section-container .box-container .list-container .add-container .form-container .form {
   border-radius: 4px;
-  margin: 5px;
+  margin: 10px;
   display: flex;
   justify-content: center;
   color: white;
@@ -223,16 +223,16 @@ body {
   font-size: 1.25rem;
   word-wrap: normal;
 }
-.main-section-container .sidebar .project-container .project-form-container .form {
+.main-section-container .sidebar .project-container .project-form-container .form-container .form {
   border: none;
   border-radius: 8px;
   margin: 5px;
-  width: 8rem;
+  width: 7.2rem;
   height: 3rem;
   color: white;
   font-weight: 700;
 }
-.main-section-container .sidebar .project-container .project-form-container .form:hover {
+.main-section-container .sidebar .project-container .project-form-container .form-container .form:hover {
   cursor: pointer;
 }
 .main-section-container .sidebar .project-container .project-form-container #project-title-input {

@@ -560,10 +560,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
 /* harmony import */ var _interface__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface */ "./src/interface.js");
+/* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
 /* eslint-disable semi */
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
 // import { sub } from 'date-fns';
+
 
 
 
@@ -754,10 +756,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ createParagraph)
 /* harmony export */ });
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
+/* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
 /* eslint-disable no-console */
 /* eslint-disable no-multiple-empty-lines */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable semi */
+
 
 
 
@@ -853,6 +857,8 @@ function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const iconSpan = document.createElement('span');
   iconSpan.classList.add('material-symbols-outlined');
   iconSpan.textContent = symbolText;
+  const project = new _projects__WEBPACK_IMPORTED_MODULE_1__["default"](scheduledName);
+  console.log(project);
   
   const itemText = document.createElement('p');
   itemText.textContent = itemTitle;
@@ -864,7 +870,7 @@ function createScheduledProject(scheduledName, itemTitle, symbolText) {
 }
   
 function createProjectCreation(projectName, icon, addNew) {
-  const projectTasks = [];
+  // const projectTasks = [];
   const projectDiv = document.createElement('button');
   projectDiv.classList.add('project');
 
@@ -874,6 +880,9 @@ function createProjectCreation(projectName, icon, addNew) {
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')
   projectIcon.textContent = icon
+
+  const project = new _projects__WEBPACK_IMPORTED_MODULE_1__["default"](projectName);
+  console.log(project);
 
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
@@ -922,6 +931,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class UserInterface {
   static loadProjects() {
+    console.log('loadProjects was used in UI');
     Storage.getTodoList().getProjects().forEach((project) => {
       if (
         project.name !== 'Current'
@@ -934,7 +944,7 @@ class UserInterface {
   }
 
   static createProject() {
-    console.log('createProject ran');
+    console.log('createProject ran from inside UI');
     // ... createProject implementation ...
     const titleProject = document.querySelector('#project-title-input').value;
     console.log('titleProject = ', titleProject);
@@ -948,7 +958,7 @@ class UserInterface {
   }
 
   static switchProject(project) {
-    console.log('switchProject was called');
+    console.log('switchProject was called from UI');
     const projectTasks = project.getTasks();
     (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.displayTasks)(projectTasks);
   }
@@ -959,7 +969,7 @@ class UserInterface {
 
     const currentProject = (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.getCurrentProject)();
     if (currentProject) {
-      console.log('if statement in submitNewTask ran');
+      console.log('if statement in submitNewTask from UI ran');
       const newTask = (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.createTask)(titleTask, descriptionTask);
       currentProject.addTask(newTask);
       (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.displayTasks)(currentProject.getTasks());
@@ -973,7 +983,7 @@ class UserInterface {
 }
 
 function applyClicksButtons() {
-  console.log('applyClicksButtons ran');
+  console.log('applyClicksButtons ran from UI');
   const addTaskButton = document.querySelector('.submit-form');
   addTaskButton.addEventListener('click', () => {
     UserInterface.submitNewTask();
@@ -1008,6 +1018,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Project {
   constructor(name) {
+    console.log('constructor inside Project was used');
     this.name = name;
     this.tasks = [];
   }
@@ -1043,7 +1054,7 @@ class Project {
   }
 
   addTask(newTask) {
-    console.log('addTask was used');
+    console.log('addTask was used inside projects.js');
     if (this.tasks.find((task) => task.getName() === newTask.name)) return;
     this.tasks.push(newTask);
   }
