@@ -2,12 +2,14 @@
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
 // import { sub } from 'date-fns';
-import { createScheduledProject,
+import {
+  createScheduledProject,
   createProjectCreation,
   createFormProject,
 } from './creation-segments';
 import { makeItemActive, closePopup } from './utilities';
 import { applyClicksButtons } from './interface';
+import Project from './projects';
 
 function createHeader() {
   const pageBody = document.querySelector('#content')

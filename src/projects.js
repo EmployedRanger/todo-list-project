@@ -5,6 +5,7 @@ import {
 
 export default class Project {
   constructor(name) {
+    console.log('constructor inside Project was used');
     this.name = name;
     this.tasks = [];
   }
@@ -40,7 +41,7 @@ export default class Project {
   }
 
   addTask(newTask) {
-    console.log('addTask was used');
+    console.log('addTask was used inside projects.js');
     if (this.tasks.find((task) => task.getName() === newTask.name)) return;
     this.tasks.push(newTask);
   }

@@ -7,6 +7,7 @@ import { createProjectMain } from './projects';
 
 export default class UserInterface {
   static loadProjects() {
+    console.log('loadProjects was used in UI');
     Storage.getTodoList().getProjects().forEach((project) => {
       if (
         project.name !== 'Current'
@@ -19,7 +20,7 @@ export default class UserInterface {
   }
 
   static createProject() {
-    console.log('createProject ran');
+    console.log('createProject ran from inside UI');
     // ... createProject implementation ...
     const titleProject = document.querySelector('#project-title-input').value;
     console.log('titleProject = ', titleProject);
@@ -33,7 +34,7 @@ export default class UserInterface {
   }
 
   static switchProject(project) {
-    console.log('switchProject was called');
+    console.log('switchProject was called from UI');
     const projectTasks = project.getTasks();
     displayTasks(projectTasks);
   }
@@ -44,7 +45,7 @@ export default class UserInterface {
 
     const currentProject = getCurrentProject();
     if (currentProject) {
-      console.log('if statement in submitNewTask ran');
+      console.log('if statement in submitNewTask from UI ran');
       const newTask = createTask(titleTask, descriptionTask);
       currentProject.addTask(newTask);
       displayTasks(currentProject.getTasks());
@@ -58,7 +59,7 @@ export default class UserInterface {
 }
 
 export function applyClicksButtons() {
-  console.log('applyClicksButtons ran');
+  console.log('applyClicksButtons ran from UI');
   const addTaskButton = document.querySelector('.submit-form');
   addTaskButton.addEventListener('click', () => {
     UserInterface.submitNewTask();

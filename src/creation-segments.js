@@ -4,6 +4,7 @@
 /* eslint-disable semi */
 
 import { closeProjectFormPopup, makeProjectFormActive } from './utilities';
+import Project from './projects';
 
 export default function createParagraph(text) {
   const paragraph = document.createElement('p');
@@ -97,6 +98,8 @@ export function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const iconSpan = document.createElement('span');
   iconSpan.classList.add('material-symbols-outlined');
   iconSpan.textContent = symbolText;
+  const project = new Project(scheduledName);
+  console.log(project);
   
   const itemText = document.createElement('p');
   itemText.textContent = itemTitle;
@@ -108,7 +111,7 @@ export function createScheduledProject(scheduledName, itemTitle, symbolText) {
 }
   
 export function createProjectCreation(projectName, icon, addNew) {
-  const projectTasks = [];
+  // const projectTasks = [];
   const projectDiv = document.createElement('button');
   projectDiv.classList.add('project');
 
@@ -118,6 +121,9 @@ export function createProjectCreation(projectName, icon, addNew) {
   const projectIcon = document.createElement('span')
   projectIcon.classList.add('material-symbols-outlined')
   projectIcon.textContent = icon
+
+  const project = new Project(projectName);
+  console.log(project);
 
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
