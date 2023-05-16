@@ -560,7 +560,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
 /* harmony import */ var _interface__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface */ "./src/interface.js");
-/* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
 /* eslint-disable semi */
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
@@ -568,7 +567,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+// import Project from './projects';
 
 function createHeader() {
   const pageBody = document.querySelector('#content')
@@ -641,9 +640,9 @@ function createForm() {
   return addContainer;
 }
 
-let currentProjectList = [];
-let todayList = []
-let weekList = []
+// let currentProjectList = [];
+// let todayList = []
+// let weekList = []
 
 function createSidebar() {
   const sidebarSection = document.createElement('div')
@@ -1036,7 +1035,7 @@ class Project {
   }
 
   setName(name) {
-    console.log('setName was used');
+    console.log('setName was used inside project class');
     this.name = name;
   }
 
@@ -1117,9 +1116,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getCurrentProject": () => (/* binding */ getCurrentProject),
 /* harmony export */   "switchProject": () => (/* binding */ switchProject)
 /* harmony export */ });
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
 // import { createTodoItem } from './creation-segments';
-
+// import { closePopup } from './utilities';
 
 /* eslint-disable no-console */
 class Task {

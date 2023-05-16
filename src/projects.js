@@ -11,7 +11,7 @@ export default class Project {
   }
 
   setName(name) {
-    console.log('setName was used');
+    console.log('setName was used inside project class');
     this.name = name;
   }
 

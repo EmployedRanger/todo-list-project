@@ -1,5 +1,5 @@
 // import { createTodoItem } from './creation-segments';
-import { closePopup } from './utilities';
+// import { closePopup } from './utilities';
 
 /* eslint-disable no-console */
 export default class Task {

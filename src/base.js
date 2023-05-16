@@ -9,7 +9,7 @@ import {
 } from './creation-segments';
 import { makeItemActive, closePopup } from './utilities';
 import { applyClicksButtons } from './interface';
-import Project from './projects';
+// import Project from './projects';
 
 function createHeader() {
   const pageBody = document.querySelector('#content')
@@ -82,9 +82,9 @@ export function createForm() {
   return addContainer;
 }
 
-let currentProjectList = [];
-let todayList = []
-let weekList = []
+// let currentProjectList = [];
+// let todayList = []
+// let weekList = []
 
 function createSidebar() {
   const sidebarSection = document.createElement('div')
