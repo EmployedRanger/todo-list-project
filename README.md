@@ -15,3 +15,19 @@ from the functions that deal with the DOM?
 valuable to you and the company?
 ---- build a photo slider (think amazon pictures with arrows)
 - Are many static HTML/CSS sites still a thing or has JS been more popular?
+
+TO LEARN/COMPLETE:
+// TODO combine base.js and index.js
+// TODO html-loader
+// TODO html-loader handlebars
+// TODO local storage
+// TODO Rule of Three
+// TODO MVC architecture (model view controller)
+// TODO Investigate object-oriented vs functional programming
+// TODO Learn about tests and Testing Library
+// TODO Better understand 'associations' 
+// TODO Universally-unique IDs (UUIDs)
+
+
+COMPLETED:
+

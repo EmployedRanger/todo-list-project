@@ -25,7 +25,6 @@ export class Task {
   }
 }
 
-
 export function createFormProject() {
   console.log('createFormProject ran')
   const addContainer = document.createElement('div')

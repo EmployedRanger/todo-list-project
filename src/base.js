@@ -2,6 +2,8 @@
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
 // import { sub } from 'date-fns';
+
+import './css/style.scss'
 import {
   createScheduledProject,
   createProjectCreation,
@@ -81,10 +83,6 @@ export function createForm() {
   addContainer.appendChild(buttonContainer)
   return addContainer;
 }
-
-// let currentProjectList = [];
-// let todayList = []
-// let weekList = []
 
 function createSidebar() {
   const sidebarSection = document.createElement('div')
@@ -177,3 +175,8 @@ export default function startup() {
   content.appendChild(createFooter());
   applyClicksButtons();
 }
+
+window.addEventListener('load', () => {
+  console.log('here')
+  startup();
+});

@@ -3,6 +3,9 @@ import {
   isToday, toDate, subDays, isThisWeek,
 } from 'date-fns';
 
+// const { v4: uuidv4 } = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
+
 export default class Project {
   constructor(name) {
     console.log('constructor inside Project was used');
@@ -19,6 +22,16 @@ export default class Project {
     console.log('getName was used');
     return this.name;
   }
+
+  setID() {
+    console.log('setID was used');
+    return this.uuidv4();
+  }
+
+  // getID() {
+  //   console.log('getID was used');
+  //   return this.ID;
+  // }
 
   setTasks(tasks) {
     console.log('setTasks was used');

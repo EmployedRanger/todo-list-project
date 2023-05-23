@@ -2,7 +2,7 @@
   "name": "todo-list-project",
   "version": "1.0.0",
   "description": "Todo list made in JavaScript",
-  "main": "index.js",
+  "main": "base.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=development",
@@ -25,6 +25,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "gh-pages": "^5.0.0",
+    "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.5",
     "sass": "^1.62.1",
@@ -34,6 +35,7 @@
     "webpack-cli": "^5.0.2"
   },
   "dependencies": {
-    "date-fns": "^2.30.0"
+    "date-fns": "^2.30.0",
+    "uuid": "^9.0.0"
   }
 }

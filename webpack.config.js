@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: './src/base.js',
   devtool: 'source-map',
   output: {
     filename: 'main.js',
@@ -32,6 +32,11 @@ module.exports = {
           // Compiles Sass to CSS
           'sass-loader',
         ],
+      },
+      {
+        // Loads HTML as a string
+        test: /\.html$/i,
+        loader: 'html-loader',
       },
     ],
   },
