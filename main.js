@@ -546,199 +546,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/base.js":
-/*!*********************!*\
-  !*** ./src/base.js ***!
-  \*********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createForm": () => (/* binding */ createForm),
-/* harmony export */   "default": () => (/* binding */ startup)
-/* harmony export */ });
-/* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
-/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
-/* harmony import */ var _interface__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface */ "./src/interface.js");
-/* eslint-disable semi */
-/* eslint-disable no-console */
-// import createParagraph from './creation-segments'
-// import { sub } from 'date-fns';
-
-
-
-// import Project from './projects';
-
-function createHeader() {
-  const pageBody = document.querySelector('#content')
-
-  const headerDiv = document.createElement('div')
-  headerDiv.classList.add('header')
-  pageBody.appendChild(headerDiv)
-
-  const iconSpan = document.createElement('span');
-  iconSpan.classList.add('material-symbols-outlined');
-  iconSpan.classList.add('make-bigger')
-  iconSpan.textContent = 'checklist'
-  headerDiv.appendChild(iconSpan)
-
-  const headerTitle = document.createElement('div')
-  headerTitle.classList.add('page-title')
-  headerTitle.innerHTML = 'To-do List'
-  headerDiv.appendChild(headerTitle)
-
-  return headerDiv;
-}
-
-function createFooter() {
-  const footer = document.createElement('footer');
-  footer.classList.add('footer');
-
-  const copyrightThing = document.createElement('p')
-  copyrightThing.textContent = `Copyright © ${new Date().getFullYear()} Employed Ranger`;
-
-  footer.appendChild(copyrightThing);
-  return footer;
-}
-
-function createForm() {
-  const addContainer = document.createElement('div')
-  addContainer.classList.add('add-container')
-  const titleContainer = document.createElement('input')
-  titleContainer.setAttribute('id', 'input-title')
-  titleContainer.setAttribute('placeholder', 'Task Title')
-  titleContainer.setAttribute('maxlength', '25')
-  titleContainer.setAttribute('type', 'text')
-
-  const descriptionContainer = document.createElement('input')
-  descriptionContainer.setAttribute('id', 'input-description')
-  descriptionContainer.setAttribute('placeholder', 'Task description')
-  descriptionContainer.setAttribute('maxlength', '50')
-  descriptionContainer.setAttribute('type', 'text')
-
-  const buttonContainer = document.createElement('div')
-  buttonContainer.classList.add('form-container')
-
-  const submitButton = document.createElement('button')
-  submitButton.classList.add('submit-form')
-  submitButton.classList.add('form')
-  submitButton.textContent = 'Add Task'
-  buttonContainer.appendChild(submitButton)
-
-  const cancelButton = document.createElement('button')
-  cancelButton.classList.add('cancel-form')
-  cancelButton.classList.add('form')
-  cancelButton.textContent = 'Cancel'
-  cancelButton.addEventListener('click', () => {
-    ;(0,_utilities__WEBPACK_IMPORTED_MODULE_1__.closePopup)();
-  })
-  buttonContainer.appendChild(cancelButton)
-
-  addContainer.appendChild(titleContainer)
-  addContainer.appendChild(descriptionContainer)
-  addContainer.appendChild(buttonContainer)
-  return addContainer;
-}
-
-// let currentProjectList = [];
-// let todayList = []
-// let weekList = []
-
-function createSidebar() {
-  const sidebarSection = document.createElement('div')
-  sidebarSection.classList.add('sidebar')
-  const scheduledContainer = document.createElement('div')
-  scheduledContainer.classList.add('scheduled-container')
-  sidebarSection.appendChild(scheduledContainer)
-
-  scheduledContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createScheduledProject)('current-list', 'Current', 'event_upcoming'));
-  scheduledContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createScheduledProject)('today-list', 'Today', 'today'));
-  scheduledContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createScheduledProject)('week-list', 'This week', 'date_range'));
-
-  const projectContainer = document.createElement('div')
-  projectContainer.classList.add('project-container')
-  sidebarSection.appendChild(projectContainer)
-
-  const projectHeading = document.createElement('p')
-  projectHeading.classList.add('project-heading')
-  projectHeading.textContent = 'Projects'
-  projectContainer.appendChild(projectHeading)
-
-  const listContainer = document.createElement('div')
-  listContainer.classList.add('list-container-projects')
-  projectContainer.appendChild(listContainer)
-
-  const addProject = document.createElement('div')
-  addProject.classList.add('add-project')
-
-  listContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProjectCreation)('Mow the lawn', 'task', ''))
-  listContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProjectCreation)('Count chips', 'task', ''))
-  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProjectCreation)('Add Project', 'add', 'yes'))
-  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createFormProject)())
-
-  return sidebarSection;
-}
-
-function createTodo() {
-  const boxContainer = document.createElement('div')
-  boxContainer.classList.add('box-container')
-
-  const listContainer = document.createElement('div')
-  listContainer.classList.add('list-container')
-  boxContainer.appendChild(listContainer)
-
-  const listTitle = document.createElement('h1')
-  listTitle.classList.add('list-title')
-  listTitle.textContent = 'Current to-do list'
-  listContainer.appendChild(listTitle)
-
-  const todoSection = document.createElement('div')
-  todoSection.classList.add('Todo-section')
-  listContainer.appendChild(todoSection)
-
-  const addTaskButton = document.createElement('button')
-  addTaskButton.classList.add('add-task')
-
-  const buttonText = document.createElement('div')
-  buttonText.classList.add('button-text')
-  buttonText.textContent = 'Add Task'
-
-  const iconSpan = document.createElement('span')
-  iconSpan.classList.add('material-symbols-outlined')
-  iconSpan.textContent = 'add'
-  addTaskButton.appendChild(iconSpan)
-  addTaskButton.appendChild(buttonText)
-  addTaskButton.addEventListener('click', () => {
-    ;(0,_utilities__WEBPACK_IMPORTED_MODULE_1__.makeItemActive)();
-  })
-  listContainer.appendChild(addTaskButton)
-
-  listContainer.appendChild(createForm());
-
-  return boxContainer;
-}
-
-function createMainSection() {
-  const content = document.querySelector('#content');
-  const mainSection = document.createElement('div');
-  mainSection.classList.add('main-section-container');
-
-  mainSection.appendChild(createSidebar());
-  mainSection.appendChild(createTodo());
-  content.appendChild(mainSection);
-}
-
-function startup() {
-  const content = document.querySelector('#content');
-  content.appendChild(createHeader());
-  createMainSection();
-  content.appendChild(createFooter());
-  (0,_interface__WEBPACK_IMPORTED_MODULE_2__.applyClicksButtons)();
-}
-
-
-/***/ }),
-
 /***/ "./src/creation-segments.js":
 /*!**********************************!*\
   !*** ./src/creation-segments.js ***!
@@ -782,7 +589,6 @@ class Task {
     this.description = description;
   }
 }
-
 
 function createFormProject() {
   console.log('createFormProject ran')
@@ -1027,6 +833,9 @@ __webpack_require__.r(__webpack_exports__);
 /* eslint-disable no-console */
 
 
+// const { v4: uuidv4 } = require('uuid');
+
+
 class Project {
   constructor(name) {
     console.log('constructor inside Project was used');
@@ -1043,6 +852,16 @@ class Project {
     console.log('getName was used');
     return this.name;
   }
+
+  setID() {
+    console.log('setID was used');
+    return this.uuidv4();
+  }
+
+  // getID() {
+  //   console.log('getID was used');
+  //   return this.ID;
+  // }
 
   setTasks(tasks) {
     console.log('setTasks was used');
@@ -1359,18 +1178,196 @@ function _typeof(obj) {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
+/*!*********************!*\
+  !*** ./src/base.js ***!
+  \*********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./base */ "./src/base.js");
-/* harmony import */ var _css_style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./css/style.scss */ "./src/css/style.scss");
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createForm": () => (/* binding */ createForm),
+/* harmony export */   "default": () => (/* binding */ startup)
+/* harmony export */ });
+/* harmony import */ var _css_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/style.scss */ "./src/css/style.scss");
+/* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
+/* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
+/* harmony import */ var _interface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./interface */ "./src/interface.js");
 /* eslint-disable semi */
 /* eslint-disable no-console */
+// import createParagraph from './creation-segments'
+// import { sub } from 'date-fns';
 
 
 
-(0,_base__WEBPACK_IMPORTED_MODULE_0__["default"])();
+
+
+// import Project from './projects';
+
+function createHeader() {
+  const pageBody = document.querySelector('#content')
+
+  const headerDiv = document.createElement('div')
+  headerDiv.classList.add('header')
+  pageBody.appendChild(headerDiv)
+
+  const iconSpan = document.createElement('span');
+  iconSpan.classList.add('material-symbols-outlined');
+  iconSpan.classList.add('make-bigger')
+  iconSpan.textContent = 'checklist'
+  headerDiv.appendChild(iconSpan)
+
+  const headerTitle = document.createElement('div')
+  headerTitle.classList.add('page-title')
+  headerTitle.innerHTML = 'To-do List'
+  headerDiv.appendChild(headerTitle)
+
+  return headerDiv;
+}
+
+function createFooter() {
+  const footer = document.createElement('footer');
+  footer.classList.add('footer');
+
+  const copyrightThing = document.createElement('p')
+  copyrightThing.textContent = `Copyright © ${new Date().getFullYear()} Employed Ranger`;
+
+  footer.appendChild(copyrightThing);
+  return footer;
+}
+
+function createForm() {
+  const addContainer = document.createElement('div')
+  addContainer.classList.add('add-container')
+  const titleContainer = document.createElement('input')
+  titleContainer.setAttribute('id', 'input-title')
+  titleContainer.setAttribute('placeholder', 'Task Title')
+  titleContainer.setAttribute('maxlength', '25')
+  titleContainer.setAttribute('type', 'text')
+
+  const descriptionContainer = document.createElement('input')
+  descriptionContainer.setAttribute('id', 'input-description')
+  descriptionContainer.setAttribute('placeholder', 'Task description')
+  descriptionContainer.setAttribute('maxlength', '50')
+  descriptionContainer.setAttribute('type', 'text')
+
+  const buttonContainer = document.createElement('div')
+  buttonContainer.classList.add('form-container')
+
+  const submitButton = document.createElement('button')
+  submitButton.classList.add('submit-form')
+  submitButton.classList.add('form')
+  submitButton.textContent = 'Add Task'
+  buttonContainer.appendChild(submitButton)
+
+  const cancelButton = document.createElement('button')
+  cancelButton.classList.add('cancel-form')
+  cancelButton.classList.add('form')
+  cancelButton.textContent = 'Cancel'
+  cancelButton.addEventListener('click', () => {
+    ;(0,_utilities__WEBPACK_IMPORTED_MODULE_2__.closePopup)();
+  })
+  buttonContainer.appendChild(cancelButton)
+
+  addContainer.appendChild(titleContainer)
+  addContainer.appendChild(descriptionContainer)
+  addContainer.appendChild(buttonContainer)
+  return addContainer;
+}
+
+function createSidebar() {
+  const sidebarSection = document.createElement('div')
+  sidebarSection.classList.add('sidebar')
+  const scheduledContainer = document.createElement('div')
+  scheduledContainer.classList.add('scheduled-container')
+  sidebarSection.appendChild(scheduledContainer)
+
+  scheduledContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_1__.createScheduledProject)('current-list', 'Current', 'event_upcoming'));
+  scheduledContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_1__.createScheduledProject)('today-list', 'Today', 'today'));
+  scheduledContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_1__.createScheduledProject)('week-list', 'This week', 'date_range'));
+
+  const projectContainer = document.createElement('div')
+  projectContainer.classList.add('project-container')
+  sidebarSection.appendChild(projectContainer)
+
+  const projectHeading = document.createElement('p')
+  projectHeading.classList.add('project-heading')
+  projectHeading.textContent = 'Projects'
+  projectContainer.appendChild(projectHeading)
+
+  const listContainer = document.createElement('div')
+  listContainer.classList.add('list-container-projects')
+  projectContainer.appendChild(listContainer)
+
+  const addProject = document.createElement('div')
+  addProject.classList.add('add-project')
+
+  listContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_1__.createProjectCreation)('Mow the lawn', 'task', ''))
+  listContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_1__.createProjectCreation)('Count chips', 'task', ''))
+  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_1__.createProjectCreation)('Add Project', 'add', 'yes'))
+  projectContainer.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_1__.createFormProject)())
+
+  return sidebarSection;
+}
+
+function createTodo() {
+  const boxContainer = document.createElement('div')
+  boxContainer.classList.add('box-container')
+
+  const listContainer = document.createElement('div')
+  listContainer.classList.add('list-container')
+  boxContainer.appendChild(listContainer)
+
+  const listTitle = document.createElement('h1')
+  listTitle.classList.add('list-title')
+  listTitle.textContent = 'Current to-do list'
+  listContainer.appendChild(listTitle)
+
+  const todoSection = document.createElement('div')
+  todoSection.classList.add('Todo-section')
+  listContainer.appendChild(todoSection)
+
+  const addTaskButton = document.createElement('button')
+  addTaskButton.classList.add('add-task')
+
+  const buttonText = document.createElement('div')
+  buttonText.classList.add('button-text')
+  buttonText.textContent = 'Add Task'
+
+  const iconSpan = document.createElement('span')
+  iconSpan.classList.add('material-symbols-outlined')
+  iconSpan.textContent = 'add'
+  addTaskButton.appendChild(iconSpan)
+  addTaskButton.appendChild(buttonText)
+  addTaskButton.addEventListener('click', () => {
+    ;(0,_utilities__WEBPACK_IMPORTED_MODULE_2__.makeItemActive)();
+  })
+  listContainer.appendChild(addTaskButton)
+
+  listContainer.appendChild(createForm());
+
+  return boxContainer;
+}
+
+function createMainSection() {
+  const content = document.querySelector('#content');
+  const mainSection = document.createElement('div');
+  mainSection.classList.add('main-section-container');
+
+  mainSection.appendChild(createSidebar());
+  mainSection.appendChild(createTodo());
+  content.appendChild(mainSection);
+}
+
+function startup() {
+  const content = document.querySelector('#content');
+  content.appendChild(createHeader());
+  createMainSection();
+  content.appendChild(createFooter());
+  (0,_interface__WEBPACK_IMPORTED_MODULE_3__.applyClicksButtons)();
+}
+
+window.addEventListener('load', () => {
+  console.log('here')
+  startup();
+});
 
 })();
 
