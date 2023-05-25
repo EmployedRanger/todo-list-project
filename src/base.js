@@ -152,7 +152,6 @@ function createTodo() {
     makeItemActive();
   })
   listContainer.appendChild(addTaskButton)
-
   listContainer.appendChild(createForm());
 
   return boxContainer;
@@ -177,6 +176,5 @@ export default function startup() {
 }
 
 window.addEventListener('load', () => {
-  console.log('here')
   startup();
 });

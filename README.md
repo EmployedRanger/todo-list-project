@@ -17,8 +17,6 @@ valuable to you and the company?
 - Are many static HTML/CSS sites still a thing or has JS been more popular?
 
 TO LEARN/COMPLETE:
-// TODO combine base.js and index.js
-// TODO html-loader
 // TODO html-loader handlebars
 // TODO local storage
 // TODO Rule of Three
@@ -30,4 +28,6 @@ TO LEARN/COMPLETE:
 
 
 COMPLETED:
+// TODO combine base.js and index.js
+// TODO html-loader
 

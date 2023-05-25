@@ -1,5 +1,8 @@
+/* eslint-disable no-plusplus */
 // import { createTodoItem } from './creation-segments';
 // import { closePopup } from './utilities';
+
+import Project from './projects';
 
 /* eslint-disable no-console */
 export default class Task {
@@ -14,9 +17,17 @@ export default class Task {
     this.name = name;
   }
 
+  getName() {
+    return this.name;
+  }
+
   setDescription(description) {
     console.log('setDescription in tasks was used');
     this.description = description;
+  }
+
+  getDescription() {
+    return this.description;
   }
 
   setTimeline(timeline) {
@@ -38,6 +49,32 @@ export default class Task {
   // }
 }
 
+function createTaskInProject(taskName, description) {
+  const todoSection = document.querySelector('.Todo-section');
+
+  console.log('createTaskInProject was called');
+  const taskItem = document.createElement('div');
+  taskItem.classList.add('task-item');
+
+  const taskTitle = document.createElement('div');
+  taskTitle.classList.add('task-name');
+  taskTitle.textContent = taskName;
+  taskItem.appendChild(taskTitle);
+
+  const taskDescription = document.createElement('div');
+  taskDescription.classList.add('task-description');
+  taskDescription.textContent = description;
+
+  const taskIcon = document.createElement('span');
+  taskIcon.classList.add('material-symbols-outlined');
+  taskIcon.classList.add('icon-button');
+  taskIcon.textContent = 'check_circle';
+
+  taskItem.appendChild(taskDescription);
+  taskItem.appendChild(taskIcon);
+  todoSection.appendChild(taskItem);
+}
+
 export function createTask(title, description) {
   const newTask = new Task(title, description);
   return newTask;
@@ -54,8 +91,12 @@ function createTaskElement(task) {
 
   const taskDescription = document.createElement('div');
   taskDescription.classList.add('task-description');
-  taskDescription.textContent = task.description;
+
+  const taskLineItem = task;
+
+  taskDescription.textContent = taskLineItem.description;
   taskItem.appendChild(taskDescription);
+  console.log(`createTaskElement: ${taskItem}`);
 
   return taskItem;
 }
@@ -66,28 +107,29 @@ export function getCurrentProject() {
   return currentProject;
 }
 
-export function displayTasks(taskList) {
-  console.log('displayTasks was called in tasks.js');
-  const contentArea = document.getElementsByClassName('Todo-section');
+export function displayTasks(project) {
+  const contentArea = document.getElementsByClassName('Todo-section')[0];
+  contentArea.innerHTML = '';
 
-  // Removes list of tasks from previously selected projects
-  while (contentArea.firstChild) {
-    contentArea.removeChild(contentArea.firstChild);
-  }
+  const taskList = project.getTasks();
 
   // Creates and adds task elements
   taskList.forEach((task) => {
-    const taskElement = createTaskElement(task);
-    contentArea.appendChild(taskElement);
+    const taskName = task.getName();
+    const taskDescription = task.getDescription();
+    createTaskInProject(taskName, taskDescription);
   });
 }
 
 export function switchProject(project) {
-  console.log('switchProject was called');
+  console.log('switchProject was called in tasks.js');
+  console.log(project);
+  const newTitleName = document.getElementsByClassName('list-title')[0];
+  newTitleName.textContent = '';
+  newTitleName.textContent = project.getName();
+
   currentProject = project;
-  const projectTasks = project.getTasks();
-  console.log(`projectTasks = ${projectTasks}`);
-  displayTasks(projectTasks);
+  displayTasks(currentProject);
 }
 
 export function addTaskToCurrentProject(title, description) {
@@ -99,19 +141,31 @@ export function addTaskToCurrentProject(title, description) {
   }
 }
 
-// export function submitNewTask() {
-//   const titleTask = document.querySelector('#input-title').value;
-//   const descriptionTask = document.querySelector('#input-description').value;
+export function createTodoItem(taskName, description) {
+  const todoSection = document.querySelector('.Todo-section');
 
-//   const project = getCurrentProject();
-//   if (project) {
-//     const newTask = createTask(titleTask, descriptionTask);
-//     currentProject.addTask(newTask);
-//     displayTasks(currentProject.getTasks());
-//   }
+  console.log('createTodoItem in tasks.js was called');
+  const taskItem = document.createElement('div');
+  taskItem.classList.add('task-item');
 
-//   createTodoItem(titleTask, descriptionTask);
-//   console.log(titleTask);
-//   console.log(descriptionTask);
-//   closePopup();
-// }
+  const task = new Task(taskName, description);
+  console.log(task);
+
+  const taskTitle = document.createElement('div');
+  taskTitle.classList.add('task-name');
+  taskTitle.textContent = taskName;
+  taskItem.appendChild(taskTitle);
+
+  const taskDescription = document.createElement('div');
+  taskDescription.classList.add('task-description');
+  taskDescription.textContent = description;
+
+  const taskIcon = document.createElement('span');
+  taskIcon.classList.add('material-symbols-outlined');
+  taskIcon.classList.add('icon-button');
+  taskIcon.textContent = 'check_circle';
+
+  taskItem.appendChild(taskDescription);
+  taskItem.appendChild(taskIcon);
+  todoSection.appendChild(taskItem);
+}

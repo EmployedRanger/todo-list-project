@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
 // import { format } from 'date-fns';
-import { createTodoItem, createProjectCreation } from './creation-segments';
+import { createProjectCreation } from './creation-segments';
 import { closePopup, closeProjectFormPopup } from './utilities';
-import { displayTasks, createTask, getCurrentProject } from './tasks';
+import {
+  displayTasks, createTask, getCurrentProject, createTodoItem,
+} from './tasks';
 import { createProjectMain } from './projects';
 
 export default class UserInterface {
@@ -23,9 +25,9 @@ export default class UserInterface {
     console.log('createProject ran from inside UI');
     // ... createProject implementation ...
     const titleProject = document.querySelector('#project-title-input').value;
-    console.log('titleProject = ', titleProject);
+    // console.log('titleProject = ', titleProject);
     const project = createProjectMain(titleProject);
-    console.log(project);
+    // console.log(project);
 
     const projectName = document.querySelector('.list-container-projects');
     projectName.appendChild(createProjectCreation(project.name, 'task', ''));
@@ -45,15 +47,10 @@ export default class UserInterface {
 
     const currentProject = getCurrentProject();
     if (currentProject) {
-      console.log('if statement in submitNewTask from UI ran');
       const newTask = createTask(titleTask, descriptionTask);
       currentProject.addTask(newTask);
-      displayTasks(currentProject.getTasks());
+      displayTasks(currentProject);
     }
-
-    createTodoItem(titleTask, descriptionTask);
-    console.log(titleTask);
-    console.log(descriptionTask);
     closePopup();
   }
 }

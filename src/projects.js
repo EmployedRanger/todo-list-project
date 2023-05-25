@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default class Project {
   constructor(name) {
-    console.log('constructor inside Project was used');
     this.name = name;
     this.tasks = [];
   }
@@ -19,8 +18,14 @@ export default class Project {
   }
 
   getName() {
-    console.log('getName was used');
-    return this.name;
+    const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+    const projectNames = {
+      'today-list': `${today} to-do list`,
+      'week-list': 'This week to-do list',
+      'current-list': 'Current to-do list',
+    };
+    const formattedName = projectNames[this.name] || this.name;
+    return formattedName;
   }
 
   setID() {
@@ -39,13 +44,17 @@ export default class Project {
   }
 
   getTasks() {
-    console.log('getTasks was used');
+    // console.log('getTasks was used');
     return this.tasks;
   }
 
   getTask(taskName) {
     console.log('getTask(taskName) was used');
     return this.tasks.find((task) => task.getName() === taskName);
+  }
+
+  getTaskCount() {
+    return this.tasks.length;
   }
 
   contains(taskName) {

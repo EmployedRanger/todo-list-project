@@ -60,35 +60,6 @@ export function createFormProject() {
   return addContainer;
 }
 
-export function createTodoItem(taskName, description) {
-  const todoSection = document.querySelector('.Todo-section')
-
-  console.log('createTodoItem in creation segments was called');
-  const taskItem = document.createElement('div')
-  taskItem.classList.add('task-item')
-
-  const task = new Task(taskName, description);
-  console.log(task);
-
-  const taskTitle = document.createElement('div')
-  taskTitle.classList.add('task-name')
-  taskTitle.textContent = taskName
-  taskItem.appendChild(taskTitle)
-
-  const taskDescription = document.createElement('div')
-  taskDescription.classList.add('task-description')
-  taskDescription.textContent = description
-  
-  const taskIcon = document.createElement('span')
-  taskIcon.classList.add('material-symbols-outlined')
-  taskIcon.classList.add('icon-button')
-  taskIcon.textContent = 'check_circle'
-
-  taskItem.appendChild(taskDescription)
-  taskItem.appendChild(taskIcon)
-  todoSection.appendChild(taskItem)
-}
-
 // function updateProjectList() {
   
 // }
@@ -108,9 +79,9 @@ export function createScheduledProject(scheduledName, itemTitle, symbolText) {
   iconSpan.textContent = symbolText;
   const project = new Project(scheduledName);
   div.addEventListener('click', () => {
-    switchProject(scheduledName);
+    switchProject(project);
   });
-  console.log(project);
+  // console.log(project);
   
   const itemText = document.createElement('p');
   itemText.textContent = itemTitle;
@@ -134,7 +105,11 @@ export function createProjectCreation(projectName, icon, addNew) {
   projectIcon.textContent = icon
 
   const project = new Project(projectName);
-  console.log(project);
+  // console.log(project);
+
+  projectDiv.addEventListener('click', () => {
+    switchProject(project);
+  });
 
   projectDiv.appendChild(projectIcon)
   projectDiv.appendChild(projectItem)
