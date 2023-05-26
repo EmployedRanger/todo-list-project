@@ -208,6 +208,30 @@ body {
                 font-weight: 600;
                 font-size: 1.75rem;
             }
+            .list-container-projects {
+                .project {
+                    display: flex;
+                    justify-content: space-between;
+                    .double-container {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                    }
+                    .material-symbols-outlined:hover {
+                        cursor: pointer;
+                        scale: 1.2;
+                    }
+                }
+            }
+            .project {
+                display: flex;
+                justify-content: space-between;
+                .double-container {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+            }
             .project-form-container {
                 display: none;
                 flex-direction: column;

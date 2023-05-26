@@ -207,6 +207,28 @@ body {
   font-weight: 600;
   font-size: 1.75rem;
 }
+.main-section-container .sidebar .project-container .list-container-projects .project {
+  display: flex;
+  justify-content: space-between;
+}
+.main-section-container .sidebar .project-container .list-container-projects .project .double-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.main-section-container .sidebar .project-container .list-container-projects .project .material-symbols-outlined:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
+.main-section-container .sidebar .project-container .project {
+  display: flex;
+  justify-content: space-between;
+}
+.main-section-container .sidebar .project-container .project .double-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .main-section-container .sidebar .project-container .project-form-container {
   display: none;
   flex-direction: column;

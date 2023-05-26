@@ -59,7 +59,6 @@ export default class UserInterface {
 }
 
 export function applyClicksButtons() {
-  console.log('applyClicksButtons ran from UI');
   const addTaskButton = document.querySelector('.submit-form');
   addTaskButton.addEventListener('click', () => {
     UserInterface.submitNewTask();

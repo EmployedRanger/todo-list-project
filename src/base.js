@@ -11,8 +11,6 @@ import {
 } from './creation-segments';
 import { makeItemActive, closePopup } from './utilities';
 import { applyClicksButtons } from './interface';
-import { getCurrentProject, switchProject } from './tasks';
-// import Project from './projects';
 
 function createHeader() {
   const pageBody = document.querySelector('#content')

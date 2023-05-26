@@ -571,6 +571,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const listProjects = [];
+const userProjects = [];
+
 class Task {
   constructor(name, description, timeline = 'No date') {
     this.name = name;
@@ -605,9 +608,6 @@ function createFormProject() {
   submitButton.classList.add('submit-new-project')
   submitButton.classList.add('form')
   submitButton.textContent = 'Add Project'
-  // submitButton.addEventListener('click', () => {
-  //   submitNewProject();
-  // })
   buttonContainer.appendChild(submitButton)
 
   const cancelButton = document.createElement('button')
@@ -624,7 +624,15 @@ function createFormProject() {
   return addContainer;
 }
 
-const baseProjects = [];
+function deleteProject(projectElement) {
+  projectElement.remove();
+  console.log(listProjects[0])
+  // switchProject(listProjects[1]);
+  setTimeout(() => {
+    ;(0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(listProjects[0]);
+  }, 0);
+}
+
 
 function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const div = document.createElement('button');
@@ -636,7 +644,7 @@ function createScheduledProject(scheduledName, itemTitle, symbolText) {
   iconSpan.classList.add('material-symbols-outlined');
   iconSpan.textContent = symbolText;
   const project = new _projects__WEBPACK_IMPORTED_MODULE_1__["default"](scheduledName);
-  baseProjects.push(project);
+  listProjects.push(project);
   div.addEventListener('click', () => {
     (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(project);
   });
@@ -651,34 +659,46 @@ function createScheduledProject(scheduledName, itemTitle, symbolText) {
     setTimeout(() => {
       (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(project);
     }, 0);
-  }
-  
-  console.log(baseProjects);
+  }  
+  console.log(listProjects);
 
   return div;
 }
   
 function createProjectCreation(projectName, icon, addNew) {
-  // const projectTasks = [];
   const projectDiv = document.createElement('button');
   projectDiv.classList.add('project');
 
   const projectItem = document.createElement('p');
   projectItem.textContent = projectName;
 
-  const projectIcon = document.createElement('span')
-  projectIcon.classList.add('material-symbols-outlined')
-  projectIcon.textContent = icon
+  const projectIcon = document.createElement('span');
+  projectIcon.classList.add('material-symbols-outlined');
+  projectIcon.textContent = icon;
 
   const project = new _projects__WEBPACK_IMPORTED_MODULE_1__["default"](projectName);
-  // console.log(project);
+  userProjects.push(project);
+
+  projectDiv.dataset.project = JSON.stringify(project);
 
   projectDiv.addEventListener('click', () => {
     (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(project);
   });
 
-  projectDiv.appendChild(projectIcon)
-  projectDiv.appendChild(projectItem)
+  const doubleContainer = document.createElement('div');
+  doubleContainer.classList.add('double-container');
+  const deleteButton = document.createElement('span');
+  deleteButton.classList.add('material-symbols-outlined');
+  deleteButton.classList.add('delete-project-button');
+  deleteButton.textContent = 'close';
+
+  deleteButton.addEventListener('click', () => {
+    deleteProject(projectDiv);
+  })
+
+  doubleContainer.appendChild(projectIcon);
+  doubleContainer.appendChild(projectItem);
+  projectDiv.appendChild(doubleContainer);
   
   if (addNew !== '') {
     projectDiv.classList.add('add-project');
@@ -690,12 +710,11 @@ function createProjectCreation(projectName, icon, addNew) {
     // moveIcon.classList.add('moveable')
     // moveIcon.textContent = 'dehaze'
     // projectDiv.appendChild(moveIcon)      
+  } else {
+    projectDiv.appendChild(deleteButton);
   }
-
   return projectDiv;
 }
-
-
 
 
 /***/ }),
@@ -774,7 +793,6 @@ class UserInterface {
 }
 
 function applyClicksButtons() {
-  console.log('applyClicksButtons ran from UI');
   const addTaskButton = document.querySelector('.submit-form');
   addTaskButton.addEventListener('click', () => {
     UserInterface.submitNewTask();
@@ -1191,7 +1209,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
 /* harmony import */ var _interface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./interface */ "./src/interface.js");
-/* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tasks */ "./src/tasks.js");
 /* eslint-disable semi */
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
@@ -1201,8 +1218,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-// import Project from './projects';
 
 function createHeader() {
   const pageBody = document.querySelector('#content')

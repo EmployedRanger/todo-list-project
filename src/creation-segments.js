@@ -7,6 +7,9 @@ import { closeProjectFormPopup, makeProjectFormActive } from './utilities';
 import Project from './projects';
 import { switchProject } from './tasks';
 
+const listProjects = [];
+const userProjects = [];
+
 export class Task {
   constructor(name, description, timeline = 'No date') {
     this.name = name;
@@ -41,9 +44,6 @@ export function createFormProject() {
   submitButton.classList.add('submit-new-project')
   submitButton.classList.add('form')
   submitButton.textContent = 'Add Project'
-  // submitButton.addEventListener('click', () => {
-  //   submitNewProject();
-  // })
   buttonContainer.appendChild(submitButton)
 
   const cancelButton = document.createElement('button')
@@ -60,7 +60,15 @@ export function createFormProject() {
   return addContainer;
 }
 
-const baseProjects = [];
+function deleteProject(projectElement) {
+  projectElement.remove();
+  console.log(listProjects[0])
+  // switchProject(listProjects[1]);
+  setTimeout(() => {
+    switchProject(listProjects[0]);
+  }, 0);
+}
+
 
 export function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const div = document.createElement('button');
@@ -72,7 +80,7 @@ export function createScheduledProject(scheduledName, itemTitle, symbolText) {
   iconSpan.classList.add('material-symbols-outlined');
   iconSpan.textContent = symbolText;
   const project = new Project(scheduledName);
-  baseProjects.push(project);
+  listProjects.push(project);
   div.addEventListener('click', () => {
     switchProject(project);
   });
@@ -87,34 +95,46 @@ export function createScheduledProject(scheduledName, itemTitle, symbolText) {
     setTimeout(() => {
       switchProject(project);
     }, 0);
-  }
-  
-  console.log(baseProjects);
+  }  
+  console.log(listProjects);
 
   return div;
 }
   
 export function createProjectCreation(projectName, icon, addNew) {
-  // const projectTasks = [];
   const projectDiv = document.createElement('button');
   projectDiv.classList.add('project');
 
   const projectItem = document.createElement('p');
   projectItem.textContent = projectName;
 
-  const projectIcon = document.createElement('span')
-  projectIcon.classList.add('material-symbols-outlined')
-  projectIcon.textContent = icon
+  const projectIcon = document.createElement('span');
+  projectIcon.classList.add('material-symbols-outlined');
+  projectIcon.textContent = icon;
 
   const project = new Project(projectName);
-  // console.log(project);
+  userProjects.push(project);
+
+  projectDiv.dataset.project = JSON.stringify(project);
 
   projectDiv.addEventListener('click', () => {
     switchProject(project);
   });
 
-  projectDiv.appendChild(projectIcon)
-  projectDiv.appendChild(projectItem)
+  const doubleContainer = document.createElement('div');
+  doubleContainer.classList.add('double-container');
+  const deleteButton = document.createElement('span');
+  deleteButton.classList.add('material-symbols-outlined');
+  deleteButton.classList.add('delete-project-button');
+  deleteButton.textContent = 'close';
+
+  deleteButton.addEventListener('click', () => {
+    deleteProject(projectDiv);
+  })
+
+  doubleContainer.appendChild(projectIcon);
+  doubleContainer.appendChild(projectItem);
+  projectDiv.appendChild(doubleContainer);
   
   if (addNew !== '') {
     projectDiv.classList.add('add-project');
@@ -126,9 +146,8 @@ export function createProjectCreation(projectName, icon, addNew) {
     // moveIcon.classList.add('moveable')
     // moveIcon.textContent = 'dehaze'
     // projectDiv.appendChild(moveIcon)      
+  } else {
+    projectDiv.appendChild(deleteButton);
   }
-
   return projectDiv;
 }
-
-
