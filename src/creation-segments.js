@@ -60,13 +60,7 @@ export function createFormProject() {
   return addContainer;
 }
 
-// function updateProjectList() {
-  
-// }
-
-// function updateTasks() {
-
-// }
+const baseProjects = [];
 
 export function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const div = document.createElement('button');
@@ -78,17 +72,25 @@ export function createScheduledProject(scheduledName, itemTitle, symbolText) {
   iconSpan.classList.add('material-symbols-outlined');
   iconSpan.textContent = symbolText;
   const project = new Project(scheduledName);
+  baseProjects.push(project);
   div.addEventListener('click', () => {
     switchProject(project);
   });
-  // console.log(project);
   
   const itemText = document.createElement('p');
   itemText.textContent = itemTitle;
   
   div.appendChild(iconSpan);
   div.appendChild(itemText);
+
+  if (scheduledName === 'current-list') {
+    setTimeout(() => {
+      switchProject(project);
+    }, 0);
+  }
   
+  console.log(baseProjects);
+
   return div;
 }
   

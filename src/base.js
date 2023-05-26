@@ -179,9 +179,4 @@ export default function startup() {
 
 window.addEventListener('DOMContentLoaded', () => {
   startup();
-
-  const project = Project.find((project) => project.getName() === 'Current list');
-  if (project) {
-    switchProject(project);
-  }
 });

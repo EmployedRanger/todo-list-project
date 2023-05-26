@@ -39,16 +39,22 @@ export default class UserInterface {
   }
 
   static submitNewTask() {
-    const titleTask = document.querySelector('#input-title').value;
-    const descriptionTask = document.querySelector('#input-description').value;
+    const titleTask = document.querySelector('#input-title');
+    const descriptionTask = document.querySelector('#input-description');
+
+    const titleValue = titleTask.value;
+    const descriptionValue = descriptionTask.value;
 
     const currentProject = getCurrentProject();
     if (currentProject) {
-      const newTask = createTask(titleTask, descriptionTask);
+      const newTask = createTask(titleValue, descriptionValue);
       currentProject.addTask(newTask);
       displayTasks(currentProject);
     }
+
     closePopup();
+    titleTask.value = '';
+    descriptionTask.value = '';
   }
 }
 

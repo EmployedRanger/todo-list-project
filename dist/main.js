@@ -624,13 +624,7 @@ function createFormProject() {
   return addContainer;
 }
 
-// function updateProjectList() {
-  
-// }
-
-// function updateTasks() {
-
-// }
+const baseProjects = [];
 
 function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const div = document.createElement('button');
@@ -642,17 +636,25 @@ function createScheduledProject(scheduledName, itemTitle, symbolText) {
   iconSpan.classList.add('material-symbols-outlined');
   iconSpan.textContent = symbolText;
   const project = new _projects__WEBPACK_IMPORTED_MODULE_1__["default"](scheduledName);
+  baseProjects.push(project);
   div.addEventListener('click', () => {
     (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(project);
   });
-  // console.log(project);
   
   const itemText = document.createElement('p');
   itemText.textContent = itemTitle;
   
   div.appendChild(iconSpan);
   div.appendChild(itemText);
+
+  if (scheduledName === 'current-list') {
+    setTimeout(() => {
+      (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(project);
+    }, 0);
+  }
   
+  console.log(baseProjects);
+
   return div;
 }
   
@@ -752,16 +754,22 @@ class UserInterface {
   }
 
   static submitNewTask() {
-    const titleTask = document.querySelector('#input-title').value;
-    const descriptionTask = document.querySelector('#input-description').value;
+    const titleTask = document.querySelector('#input-title');
+    const descriptionTask = document.querySelector('#input-description');
+
+    const titleValue = titleTask.value;
+    const descriptionValue = descriptionTask.value;
 
     const currentProject = (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.getCurrentProject)();
     if (currentProject) {
-      const newTask = (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.createTask)(titleTask, descriptionTask);
+      const newTask = (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.createTask)(titleValue, descriptionValue);
       currentProject.addTask(newTask);
       (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.displayTasks)(currentProject);
     }
+
     (0,_utilities__WEBPACK_IMPORTED_MODULE_1__.closePopup)();
+    titleTask.value = '';
+    descriptionTask.value = '';
   }
 }
 
@@ -801,7 +809,8 @@ __webpack_require__.r(__webpack_exports__);
 
 // const { v4: uuidv4 } = require('uuid');
 
-let projectList = [];
+
+const projectList = [];
 
 class Project {
   constructor(name) {
@@ -907,7 +916,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addTaskToCurrentProject": () => (/* binding */ addTaskToCurrentProject),
 /* harmony export */   "createTask": () => (/* binding */ createTask),
-/* harmony export */   "createTodoItem": () => (/* binding */ createTodoItem),
 /* harmony export */   "default": () => (/* binding */ Task),
 /* harmony export */   "displayTasks": () => (/* binding */ displayTasks),
 /* harmony export */   "getCurrentProject": () => (/* binding */ getCurrentProject),
@@ -965,7 +973,13 @@ class Task {
   // }
 }
 
-function createTaskInProject(taskName, description) {
+function deleteTask(project, taskName) {
+  const tasks = project.getTasks();
+  const updatedTasks = tasks.filter((task) => task.getName() !== taskName);
+  project.setTasks(updatedTasks);
+}
+
+function createTaskInProject(taskName, description, project) {
   const todoSection = document.querySelector('.Todo-section');
 
   console.log('createTaskInProject was called');
@@ -985,6 +999,10 @@ function createTaskInProject(taskName, description) {
   taskIcon.classList.add('material-symbols-outlined');
   taskIcon.classList.add('icon-button');
   taskIcon.textContent = 'check_circle';
+  taskIcon.addEventListener('click', () => {
+    deleteTask(project, taskName);
+    taskItem.remove();
+  });
 
   taskItem.appendChild(taskDescription);
   taskItem.appendChild(taskIcon);
@@ -994,27 +1012,6 @@ function createTaskInProject(taskName, description) {
 function createTask(title, description) {
   const newTask = new Task(title, description);
   return newTask;
-}
-
-function createTaskElement(task) {
-  const taskItem = document.createElement('div');
-  taskItem.classList.add('task-item');
-
-  const taskTitle = document.createElement('div');
-  taskTitle.classList.add('task-name');
-  taskTitle.textContent = task.name;
-  taskItem.appendChild(taskTitle);
-
-  const taskDescription = document.createElement('div');
-  taskDescription.classList.add('task-description');
-
-  const taskLineItem = task;
-
-  taskDescription.textContent = taskLineItem.description;
-  taskItem.appendChild(taskDescription);
-  console.log(`createTaskElement: ${taskItem}`);
-
-  return taskItem;
 }
 
 let currentProject = null;
@@ -1033,7 +1030,7 @@ function displayTasks(project) {
   taskList.forEach((task) => {
     const taskName = task.getName();
     const taskDescription = task.getDescription();
-    createTaskInProject(taskName, taskDescription);
+    createTaskInProject(taskName, taskDescription, project);
   });
 }
 
@@ -1055,35 +1052,6 @@ function addTaskToCurrentProject(title, description) {
     currentProject.addTask(newTask);
     displayTasks(currentProject.getTasks);
   }
-}
-
-function createTodoItem(taskName, description) {
-  const todoSection = document.querySelector('.Todo-section');
-
-  console.log('createTodoItem in tasks.js was called');
-  const taskItem = document.createElement('div');
-  taskItem.classList.add('task-item');
-
-  const task = new Task(taskName, description);
-  console.log(task);
-
-  const taskTitle = document.createElement('div');
-  taskTitle.classList.add('task-name');
-  taskTitle.textContent = taskName;
-  taskItem.appendChild(taskTitle);
-
-  const taskDescription = document.createElement('div');
-  taskDescription.classList.add('task-description');
-  taskDescription.textContent = description;
-
-  const taskIcon = document.createElement('span');
-  taskIcon.classList.add('material-symbols-outlined');
-  taskIcon.classList.add('icon-button');
-  taskIcon.textContent = 'check_circle';
-
-  taskItem.appendChild(taskDescription);
-  taskItem.appendChild(taskIcon);
-  todoSection.appendChild(taskItem);
 }
 
 
@@ -1401,11 +1369,6 @@ function startup() {
 
 window.addEventListener('DOMContentLoaded', () => {
   startup();
-
-  const project = Project.find((project) => project.getName() === 'Current list');
-  if (project) {
-    (0,_tasks__WEBPACK_IMPORTED_MODULE_4__.switchProject)(project);
-  }
 });
 
 })();
