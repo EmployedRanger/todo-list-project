@@ -736,11 +736,8 @@ class UserInterface {
 
   static createProject() {
     console.log('createProject ran from inside UI');
-    // ... createProject implementation ...
     const titleProject = document.querySelector('#project-title-input').value;
-    // console.log('titleProject = ', titleProject);
     const project = (0,_projects__WEBPACK_IMPORTED_MODULE_3__.createProjectMain)(titleProject);
-    // console.log(project);
 
     const projectName = document.querySelector('.list-container-projects');
     projectName.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProjectCreation)(project.name, 'task', ''));
@@ -804,11 +801,13 @@ __webpack_require__.r(__webpack_exports__);
 
 // const { v4: uuidv4 } = require('uuid');
 
+let projectList = [];
 
 class Project {
   constructor(name) {
     this.name = name;
     this.tasks = [];
+    projectList.push(name);
   }
 
   setName(name) {
@@ -1224,10 +1223,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
 /* harmony import */ var _interface__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./interface */ "./src/interface.js");
+/* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tasks */ "./src/tasks.js");
 /* eslint-disable semi */
 /* eslint-disable no-console */
 // import createParagraph from './creation-segments'
 // import { sub } from 'date-fns';
+
 
 
 
@@ -1395,10 +1396,16 @@ function startup() {
   createMainSection();
   content.appendChild(createFooter());
   (0,_interface__WEBPACK_IMPORTED_MODULE_3__.applyClicksButtons)();
+  // switchProject('current-list')
 }
 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
   startup();
+
+  const project = Project.find((project) => project.getName() === 'Current list');
+  if (project) {
+    (0,_tasks__WEBPACK_IMPORTED_MODULE_4__.switchProject)(project);
+  }
 });
 
 })();

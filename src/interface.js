@@ -3,7 +3,7 @@
 import { createProjectCreation } from './creation-segments';
 import { closePopup, closeProjectFormPopup } from './utilities';
 import {
-  displayTasks, createTask, getCurrentProject, createTodoItem,
+  displayTasks, createTask, getCurrentProject,
 } from './tasks';
 import { createProjectMain } from './projects';
 
@@ -23,11 +23,8 @@ export default class UserInterface {
 
   static createProject() {
     console.log('createProject ran from inside UI');
-    // ... createProject implementation ...
     const titleProject = document.querySelector('#project-title-input').value;
-    // console.log('titleProject = ', titleProject);
     const project = createProjectMain(titleProject);
-    // console.log(project);
 
     const projectName = document.querySelector('.list-container-projects');
     projectName.appendChild(createProjectCreation(project.name, 'task', ''));

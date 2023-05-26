@@ -11,6 +11,7 @@ import {
 } from './creation-segments';
 import { makeItemActive, closePopup } from './utilities';
 import { applyClicksButtons } from './interface';
+import { getCurrentProject, switchProject } from './tasks';
 // import Project from './projects';
 
 function createHeader() {
@@ -173,8 +174,14 @@ export default function startup() {
   createMainSection();
   content.appendChild(createFooter());
   applyClicksButtons();
+  // switchProject('current-list')
 }
 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
   startup();
+
+  const project = Project.find((project) => project.getName() === 'Current list');
+  if (project) {
+    switchProject(project);
+  }
 });
