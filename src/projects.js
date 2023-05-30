@@ -47,7 +47,7 @@ export default class Project {
   }
 
   getTasks() {
-    // console.log('getTasks was used');
+    console.log('getTasks was used');
     return this.tasks;
   }
 

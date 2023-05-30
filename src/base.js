@@ -1,7 +1,5 @@
 /* eslint-disable semi */
 /* eslint-disable no-console */
-// import createParagraph from './creation-segments'
-// import { sub } from 'date-fns';
 
 import './css/style.scss'
 import {

@@ -51,14 +51,14 @@ const Storage = {
     Storage.saveList(todoList);
   },
 
-  renameTask(projectName, taskName, newTaskName) {
-    const todoList = Storage.getTodo();
-    todoList
-      .getProject(projectName)
-      .getTask(taskName)
-      .setName(newTaskName);
-    Storage.saveList(todoList);
-  },
+  // renameTask(projectName, taskName, newTaskName) {
+  //   const todoList = Storage.getTodo();
+  //   todoList
+  //     .getProject(projectName)
+  //     .getTask(taskName)
+  //     .setName(newTaskName);
+  //   Storage.saveList(todoList);
+  // },
 
   updateTodayProject() {
     console.log('updateTodayProject in Storage ran');
@@ -75,6 +75,6 @@ const Storage = {
   },
 };
 
-const storage = Object.create(Storage);
+// const storage = Object.create(Storage);
 
-export default storage;
+export default Storage;

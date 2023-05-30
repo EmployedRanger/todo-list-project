@@ -3,6 +3,10 @@ import { compareAsc, toDate } from 'date-fns';
 import Project from './projects';
 import Task from './tasks';
 
+import(/* webpackChunkName: "task" */ './tasks').then((taskModule) => {
+  Task = taskModule.default;
+});
+
 export default class TodoList {
   constructor() {
     console.log('Constructor in TodoList ran');

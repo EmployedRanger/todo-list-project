@@ -7,12 +7,11 @@ import {
   getCurrentProject,
 } from './tasks';
 import { createProjectMain } from './projects';
-import Storage from './storage';
 
 class UserInterface {
-  constructor() {
-    this.storage = new Storage();
-  }
+  // constructor() {
+  //   this.storage = new Storage();
+  // }
 
   loadProjects() {
     console.log('loadProjects was used in UI');

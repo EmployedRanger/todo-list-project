@@ -1,8 +1,14 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-plusplus */
 // import { createTodoItem } from './creation-segments';
 // import { closePopup } from './utilities';
 
 import { } from './projects';
+// import Storage from './storage';
+let Storage;
+import(/* webpackChunkName: "storage" */ './storage').then((module) => {
+  Storage = module.default;
+});
 
 /* eslint-disable no-console */
 export default class Task {
