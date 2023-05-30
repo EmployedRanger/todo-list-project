@@ -115,6 +115,69 @@ function addDays(dirtyDate, dirtyAmount) {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/esm/compareAsc/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/date-fns/esm/compareAsc/index.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ compareAsc)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
+
+/**
+ * @name compareAsc
+ * @category Common Helpers
+ * @summary Compare the two dates and return -1, 0 or 1.
+ *
+ * @description
+ * Compare the two dates and return 1 if the first date is after the second,
+ * -1 if the first date is before the second or 0 if dates are equal.
+ *
+ * @param {Date|Number} dateLeft - the first date to compare
+ * @param {Date|Number} dateRight - the second date to compare
+ * @returns {Number} the result of the comparison
+ * @throws {TypeError} 2 arguments required
+ *
+ * @example
+ * // Compare 11 February 1987 and 10 July 1989:
+ * const result = compareAsc(new Date(1987, 1, 11), new Date(1989, 6, 10))
+ * //=> -1
+ *
+ * @example
+ * // Sort the array of dates:
+ * const result = [
+ *   new Date(1995, 6, 2),
+ *   new Date(1987, 1, 11),
+ *   new Date(1989, 6, 10)
+ * ].sort(compareAsc)
+ * //=> [
+ * //   Wed Feb 11 1987 00:00:00,
+ * //   Mon Jul 10 1989 00:00:00,
+ * //   Sun Jul 02 1995 00:00:00
+ * // ]
+ */
+function compareAsc(dirtyDateLeft, dirtyDateRight) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(2, arguments);
+  var dateLeft = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDateLeft);
+  var dateRight = (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDateRight);
+  var diff = dateLeft.getTime() - dateRight.getTime();
+  if (diff < 0) {
+    return -1;
+  } else if (diff > 0) {
+    return 1;
+    // Return 0 if diff is 0; return NaN if diff is NaN
+  } else {
+    return diff;
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/esm/isSameDay/index.js":
 /*!******************************************************!*\
   !*** ./node_modules/date-fns/esm/isSameDay/index.js ***!
@@ -554,14 +617,18 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Task": () => (/* binding */ Task),
 /* harmony export */   "createFormProject": () => (/* binding */ createFormProject),
 /* harmony export */   "createProjectCreation": () => (/* binding */ createProjectCreation),
-/* harmony export */   "createScheduledProject": () => (/* binding */ createScheduledProject)
+/* harmony export */   "createScheduledProject": () => (/* binding */ createScheduledProject),
+/* harmony export */   "createTask": () => (/* binding */ createTask),
+/* harmony export */   "displayTasks": () => (/* binding */ displayTasks),
+/* harmony export */   "getCurrentProject": () => (/* binding */ getCurrentProject),
+/* harmony export */   "switchProject": () => (/* binding */ switchProject)
 /* harmony export */ });
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
 /* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
 /* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasks */ "./src/tasks.js");
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./storage */ "./src/storage.js");
 /* eslint-disable no-console */
 /* eslint-disable no-multiple-empty-lines */
 /* eslint-disable no-trailing-spaces */
@@ -571,25 +638,82 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 const listProjects = [];
 const userProjects = [];
+let currentProject = null;
 
-class Task {
-  constructor(name, description, timeline = 'No date') {
-    this.name = name;
-    this.description = description;
-    this.timeline = timeline;
-  }
 
-  setName(name) {
-    console.log('setName in tasks was used');
-    this.name = name;
-  }
+function deleteTask(project, taskName) {
+  const tasks = project.getTasks();
+  const updatedTasks = tasks.filter((task) => task.getName() !== taskName);
+  _storage__WEBPACK_IMPORTED_MODULE_3__["default"].deleteTask(taskName);
+  project.setTasks(updatedTasks);
+}
 
-  setDescription(description) {
-    console.log('setDescription in tasks was used');
-    this.description = description;
-  }
+function createTask(title, description) {
+  const newTask = new _tasks__WEBPACK_IMPORTED_MODULE_2__["default"](title, description);
+  return newTask;
+}
+
+function createTaskInProject(taskName, description, project) {
+  const todoSection = document.querySelector('.Todo-section');
+
+  console.log('createTaskInProject was called');
+  const taskItem = document.createElement('div');
+  taskItem.classList.add('task-item');
+
+  const taskTitle = document.createElement('div');
+  taskTitle.classList.add('task-name');
+  taskTitle.textContent = taskName;
+  taskItem.appendChild(taskTitle);
+
+  const taskDescription = document.createElement('div');
+  taskDescription.classList.add('task-description');
+  taskDescription.textContent = description;
+
+  const taskIcon = document.createElement('span');
+  taskIcon.classList.add('material-symbols-outlined');
+  taskIcon.classList.add('icon-button');
+  taskIcon.textContent = 'check_circle';
+  taskIcon.addEventListener('click', () => {
+    deleteTask(project, taskName);
+    taskItem.remove();
+  });
+
+  _storage__WEBPACK_IMPORTED_MODULE_3__["default"].addTask(project, taskName);
+  taskItem.appendChild(taskDescription);
+  taskItem.appendChild(taskIcon);
+  todoSection.appendChild(taskItem);
+}
+
+function displayTasks(project) {
+  const contentArea = document.getElementsByClassName('Todo-section')[0];
+  contentArea.innerHTML = '';
+
+  const taskList = project.getTasks();
+
+  taskList.forEach((task) => {
+    const taskName = task.getName();
+    const taskDescription = task.getDescription();
+    createTaskInProject(taskName, taskDescription, project);
+  });
+}
+
+function switchProject(project) {
+  console.log('switchProject was called in tasks.js');
+  console.log(project);
+
+  currentProject = project;
+  const newTitleName = document.getElementsByClassName('list-title')[0];
+  newTitleName.textContent = '';
+  newTitleName.textContent = project.getName();
+
+  displayTasks(currentProject);
+}
+
+function getCurrentProject() {
+  return currentProject;
 }
 
 function createFormProject() {
@@ -629,10 +753,9 @@ function deleteProject(projectElement) {
   console.log(listProjects[0])
   // switchProject(listProjects[1]);
   setTimeout(() => {
-    ;(0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(listProjects[0]);
+    switchProject(listProjects[0]);
   }, 0);
 }
-
 
 function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const div = document.createElement('button');
@@ -646,7 +769,7 @@ function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const project = new _projects__WEBPACK_IMPORTED_MODULE_1__["default"](scheduledName);
   listProjects.push(project);
   div.addEventListener('click', () => {
-    (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(project);
+    switchProject(project);
   });
   
   const itemText = document.createElement('p');
@@ -657,7 +780,7 @@ function createScheduledProject(scheduledName, itemTitle, symbolText) {
 
   if (scheduledName === 'current-list') {
     setTimeout(() => {
-      (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(project);
+      switchProject(project);
     }, 0);
   }  
   console.log(listProjects);
@@ -678,11 +801,10 @@ function createProjectCreation(projectName, icon, addNew) {
 
   const project = new _projects__WEBPACK_IMPORTED_MODULE_1__["default"](projectName);
   userProjects.push(project);
-
   projectDiv.dataset.project = JSON.stringify(project);
 
   projectDiv.addEventListener('click', () => {
-    (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.switchProject)(project);
+    switchProject(project);
   });
 
   const doubleContainer = document.createElement('div');
@@ -716,6 +838,33 @@ function createProjectCreation(projectName, icon, addNew) {
   return projectDiv;
 }
 
+// export class Task {
+//   constructor(name, description, timeline = 'No date') {
+//     this.name = name;
+//     this.description = description;
+//     this.timeline = timeline;
+//   }
+
+//   setName(name) {
+//     console.log('setName in tasks was used');
+//     this.name = name;
+//   }
+
+//   setDescription(description) {
+//     console.log('setDescription in tasks was used');
+//     this.description = description;
+//   }
+// }
+
+// export function addTaskToCurrentProject(title, description) {
+//   const project = getCurrentProject();
+//   if (project) {
+//     const newTask = createTask(title, description);
+//     currentProject.addTask(newTask);
+//     displayTasks(currentProject.getTasks);
+//   }
+// }
+
 
 /***/ }),
 
@@ -731,18 +880,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _creation_segments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./creation-segments */ "./src/creation-segments.js");
 /* harmony import */ var _utilities__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utilities */ "./src/utilities.js");
-/* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasks */ "./src/tasks.js");
-/* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
+/* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./storage */ "./src/storage.js");
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-console */
 
 
 
+// import {
+//   displayTasks,
+//   createTask,
+//   getCurrentProject,
+// } from './tasks';
+// import Task from './tasks';
+
 
 
 class UserInterface {
-  // constructor() {
-  //   this.storage = new Storage();
-  // }
+  constructor() {
+    this.storage = new _storage__WEBPACK_IMPORTED_MODULE_3__["default"]();
+  }
 
   loadProjects() {
     console.log('loadProjects was used in UI');
@@ -760,7 +917,7 @@ class UserInterface {
   createProject() {
     console.log('createProject ran from inside UI');
     const titleProject = document.querySelector('#project-title-input').value;
-    const project = (0,_projects__WEBPACK_IMPORTED_MODULE_3__.createProjectMain)(titleProject);
+    const project = (0,_projects__WEBPACK_IMPORTED_MODULE_2__.createProjectMain)(titleProject);
 
     const projectName = document.querySelector('.list-container-projects');
     projectName.appendChild((0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createProjectCreation)(project.getName(), 'task', ''));
@@ -772,7 +929,7 @@ class UserInterface {
   switchProject(project) {
     console.log('switchProject was called from UI');
     const projectTasks = project.getTasks();
-    (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.displayTasks)(projectTasks);
+    (0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.displayTasks)(projectTasks);
   }
 
   submitNewTask() {
@@ -780,12 +937,12 @@ class UserInterface {
     const descriptionTask = document.querySelector('#input-description');
     const titleValue = titleTask.value;
     const descriptionValue = descriptionTask.value;
-    const currentProject = (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.getCurrentProject)();
+    const currentProject = (0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.getCurrentProject)();
 
     if (currentProject) {
-      const newTask = (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.createTask)(titleValue, descriptionValue);
+      const newTask = (0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.createTask)(titleValue, descriptionValue);
       currentProject.addTask(newTask);
-      (0,_tasks__WEBPACK_IMPORTED_MODULE_2__.displayTasks)(currentProject);
+      (0,_creation_segments__WEBPACK_IMPORTED_MODULE_0__.displayTasks)(currentProject);
       this.storage.addTask(currentProject.getName(), newTask);
     }
 
@@ -937,6 +1094,103 @@ function createProjectMain(title) {
 
 /***/ }),
 
+/***/ "./src/storage.js":
+/*!************************!*\
+  !*** ./src/storage.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _todo_list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo-list */ "./src/todo-list.js");
+/* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
+/* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasks */ "./src/tasks.js");
+/* eslint-disable no-console */
+
+
+
+
+const Storage = {
+  saveList(data) {
+    localStorage.setItem('todoList', JSON.stringify(data));
+  },
+
+  getTodo() {
+    const todoList = Object.assign(
+      new _todo_list__WEBPACK_IMPORTED_MODULE_0__["default"](),
+      JSON.parse(localStorage.getItem('todoList')),
+    );
+
+    todoList.setProjects(
+      todoList.getProjects().map((project) => Object.assign(new _projects__WEBPACK_IMPORTED_MODULE_1__["default"](), project)),
+    );
+
+    todoList.getProjects().forEach((project) => {
+      project.setTasks(
+        project.getTasks().map((task) => Object.assign(new _tasks__WEBPACK_IMPORTED_MODULE_2__["default"](), task)),
+      );
+    });
+
+    return todoList;
+  },
+
+  addProject(project) {
+    const todoList = Storage.getTodo();
+    todoList.addProject(project);
+    Storage.saveList(todoList);
+  },
+
+  deleteProject(projectName) {
+    const todoList = Storage.getTodo();
+    todoList.deleteProject(projectName);
+    Storage.saveList(todoList);
+  },
+
+  addTask(projectName, task) {
+    const todoList = Storage.getTodo();
+    todoList.getProject(projectName).addTask(task);
+    Storage.saveList(todoList);
+  },
+
+  deleteTask(projectName, taskName) {
+    const todoList = Storage.getTodo();
+    todoList.getProject(projectName).deleteTask(taskName);
+    Storage.saveList(todoList);
+  },
+
+  // renameTask(projectName, taskName, newTaskName) {
+  //   const todoList = Storage.getTodo();
+  //   todoList
+  //     .getProject(projectName)
+  //     .getTask(taskName)
+  //     .setName(newTaskName);
+  //   Storage.saveList(todoList);
+  // },
+
+  updateTodayProject() {
+    console.log('updateTodayProject in Storage ran');
+    const todoList = Storage.getTodo();
+    todoList.updateTodayProject();
+    Storage.saveList(todoList);
+  },
+
+  updateWeekProject() {
+    console.log('updateWeekProject in Storage ran');
+    const todoList = Storage.getTodo();
+    todoList.updateWeekProject();
+    Storage.saveList(todoList);
+  },
+};
+
+// const storage = Object.create(Storage);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Storage);
+
+
+/***/ }),
+
 /***/ "./src/tasks.js":
 /*!**********************!*\
   !*** ./src/tasks.js ***!
@@ -945,12 +1199,7 @@ function createProjectMain(title) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addTaskToCurrentProject": () => (/* binding */ addTaskToCurrentProject),
-/* harmony export */   "createTask": () => (/* binding */ createTask),
-/* harmony export */   "default": () => (/* binding */ Task),
-/* harmony export */   "displayTasks": () => (/* binding */ displayTasks),
-/* harmony export */   "getCurrentProject": () => (/* binding */ getCurrentProject),
-/* harmony export */   "switchProject": () => (/* binding */ switchProject)
+/* harmony export */   "default": () => (/* binding */ Task)
 /* harmony export */ });
 /* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
 /* eslint-disable import/no-cycle */
@@ -960,10 +1209,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import Storage from './storage';
-let Storage;
-__webpack_require__.e(/*! import() | storage */ "storage").then(__webpack_require__.bind(__webpack_require__, /*! ./storage */ "./src/storage.js")).then((module) => {
-  Storage = module.default;
-});
+// let Storage;
+// import(/* webpackChunkName: "storage" */ './storage').then((module) => {
+//   Storage = module.default;
+// });
 
 /* eslint-disable no-console */
 class Task {
@@ -991,10 +1240,10 @@ class Task {
     return this.description;
   }
 
-  setTimeline(timeline) {
-    console.log('setTimeline in tasks was used');
-    this.timeline = timeline;
-  }
+  // setTimeline(timeline) {
+  //   console.log('setTimeline in tasks was used');
+  //   this.timeline = timeline;
+  // }
 
   // getDate() {
   //   console.log('getDate in tasks was used');
@@ -1010,86 +1259,188 @@ class Task {
   // }
 }
 
-function deleteTask(project, taskName) {
-  const tasks = project.getTasks();
-  const updatedTasks = tasks.filter((task) => task.getName() !== taskName);
-  Storage.deleteTask(taskName);
-  project.setTasks(updatedTasks);
-}
+// function deleteTask(project, taskName) {
+//   const tasks = project.getTasks();
+//   const updatedTasks = tasks.filter((task) => task.getName() !== taskName);
+//   Storage.deleteTask(taskName);
+//   project.setTasks(updatedTasks);
+// }
 
-function createTaskInProject(taskName, description, project) {
-  const todoSection = document.querySelector('.Todo-section');
+// function createTaskInProject(taskName, description, project) {
+//   const todoSection = document.querySelector('.Todo-section');
 
-  console.log('createTaskInProject was called');
-  const taskItem = document.createElement('div');
-  taskItem.classList.add('task-item');
+//   console.log('createTaskInProject was called');
+//   const taskItem = document.createElement('div');
+//   taskItem.classList.add('task-item');
 
-  const taskTitle = document.createElement('div');
-  taskTitle.classList.add('task-name');
-  taskTitle.textContent = taskName;
-  taskItem.appendChild(taskTitle);
+//   const taskTitle = document.createElement('div');
+//   taskTitle.classList.add('task-name');
+//   taskTitle.textContent = taskName;
+//   taskItem.appendChild(taskTitle);
 
-  const taskDescription = document.createElement('div');
-  taskDescription.classList.add('task-description');
-  taskDescription.textContent = description;
+//   const taskDescription = document.createElement('div');
+//   taskDescription.classList.add('task-description');
+//   taskDescription.textContent = description;
 
-  const taskIcon = document.createElement('span');
-  taskIcon.classList.add('material-symbols-outlined');
-  taskIcon.classList.add('icon-button');
-  taskIcon.textContent = 'check_circle';
-  taskIcon.addEventListener('click', () => {
-    deleteTask(project, taskName);
-    taskItem.remove();
-  });
+//   const taskIcon = document.createElement('span');
+//   taskIcon.classList.add('material-symbols-outlined');
+//   taskIcon.classList.add('icon-button');
+//   taskIcon.textContent = 'check_circle';
+//   taskIcon.addEventListener('click', () => {
+//     deleteTask(project, taskName);
+//     taskItem.remove();
+//   });
 
-  Storage.addTask(project, taskName);
-  taskItem.appendChild(taskDescription);
-  taskItem.appendChild(taskIcon);
-  todoSection.appendChild(taskItem);
-}
+//   Storage.addTask(project, taskName);
+//   taskItem.appendChild(taskDescription);
+//   taskItem.appendChild(taskIcon);
+//   todoSection.appendChild(taskItem);
+// }
 
-function createTask(title, description) {
-  const newTask = new Task(title, description);
-  return newTask;
-}
+// export function createTask(title, description) {
+//   const newTask = new Task(title, description);
+//   return newTask;
+// }
 
-let currentProject = null;
+// let currentProject = null;
 
-function getCurrentProject() {
-  return currentProject;
-}
+// export function getCurrentProject() {
+//   return currentProject;
+// }
 
-function displayTasks(project) {
-  const contentArea = document.getElementsByClassName('Todo-section')[0];
-  contentArea.innerHTML = '';
+// export function displayTasks(project) {
+//   const contentArea = document.getElementsByClassName('Todo-section')[0];
+//   contentArea.innerHTML = '';
 
-  const taskList = project.getTasks();
+//   const taskList = project.getTasks();
 
-  // Creates and adds task elements
-  taskList.forEach((task) => {
-    const taskName = task.getName();
-    const taskDescription = task.getDescription();
-    createTaskInProject(taskName, taskDescription, project);
-  });
-}
+//   // Creates and adds task elements
+//   taskList.forEach((task) => {
+//     const taskName = task.getName();
+//     const taskDescription = task.getDescription();
+//     createTaskInProject(taskName, taskDescription, project);
+//   });
+// }
 
-function switchProject(project) {
-  console.log('switchProject was called in tasks.js');
-  console.log(project);
-  const newTitleName = document.getElementsByClassName('list-title')[0];
-  newTitleName.textContent = '';
-  newTitleName.textContent = project.getName();
+// export function switchProject(project) {
+//   console.log('switchProject was called in tasks.js');
+//   console.log(project);
+//   const newTitleName = document.getElementsByClassName('list-title')[0];
+//   newTitleName.textContent = '';
+//   newTitleName.textContent = project.getName();
 
-  currentProject = project;
-  displayTasks(currentProject);
-}
+//   currentProject = project;
+//   displayTasks(currentProject);
+// }
 
-function addTaskToCurrentProject(title, description) {
-  const project = getCurrentProject();
-  if (project) {
-    const newTask = createTask(title, description);
-    currentProject.addTask(newTask);
-    displayTasks(currentProject.getTasks);
+// export function addTaskToCurrentProject(title, description) {
+//   const project = getCurrentProject();
+//   if (project) {
+//     const newTask = createTask(title, description);
+//     currentProject.addTask(newTask);
+//     displayTasks(currentProject.getTasks);
+//   }
+// }
+
+
+/***/ }),
+
+/***/ "./src/todo-list.js":
+/*!**************************!*\
+  !*** ./src/todo-list.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TodoList)
+/* harmony export */ });
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/compareAsc/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _projects__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./projects */ "./src/projects.js");
+/* harmony import */ var _tasks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tasks */ "./src/tasks.js");
+/* eslint-disable no-console */
+// import(/* webpackChunkName: "task" */ './tasks').then((taskModule) => {
+//   Task = taskModule.default;
+// });
+
+
+
+
+
+class TodoList {
+  constructor() {
+    console.log('Constructor in TodoList ran');
+    this.projects = [];
+    this.projects.push(new _projects__WEBPACK_IMPORTED_MODULE_0__["default"]('Current'));
+    this.projects.push(new _projects__WEBPACK_IMPORTED_MODULE_0__["default"]('Today'));
+    this.projects.push(new _projects__WEBPACK_IMPORTED_MODULE_0__["default"]('This week'));
+  }
+
+  setProjects(projects) {
+    this.projects = projects;
+  }
+
+  getProjects() {
+    return this.projects;
+  }
+
+  getProject(projectName) {
+    return this.getProjects().find((project) => project.getName() === projectName);
+  }
+
+  contains(projectName) {
+    return this.projects.some((project) => project.getName() === projectName);
+  }
+
+  addProject(newProject) {
+    if (this.projects.find((project) => project.name === newProject.name)) return;
+    this.projects.push(newProject);
+  }
+
+  deleteProject(projectName) {
+    const projectDeleted = this.projects.find(
+      (project) => project.getName() === projectName,
+    );
+    this.projects.splice(this.projects.indexOf(projectDeleted), 1);
+  }
+
+  updateTodayProject() {
+    this.getProject('Today').tasks = [];
+
+    this.projects.forEach((project) => {
+      if (project.getName() === 'Today' || project.getName() === 'This week') return;
+
+      const todayTasks = project.getDailyTasks();
+      todayTasks.forEach((task) => {
+        const taskName = `${task.getName()} ${project.getName()}`;
+        const taskDescription = `${task.getDescription()} ${project.getDescription()}`;
+
+        this.getProject('Today').addTask(new _tasks__WEBPACK_IMPORTED_MODULE_1__["default"](taskName, taskDescription, task.getDate()));
+      });
+    });
+  }
+
+  updateWeekProject() {
+    this.getProject('This week').tasks = [];
+
+    this.projects.forEach((project) => {
+      if (project.getName() === 'This week' || project.getName() === 'Today') return;
+
+      const weekTasks = project.getWeeklyTasks();
+      weekTasks.forEach((task) => {
+        const taskName = `${task.getName()} {$(project.getName()})`;
+        const taskDescription = `${task.getDescription()} {$(project.getDescription()})`;
+        this.getProject('Today').addTask(new _tasks__WEBPACK_IMPORTED_MODULE_1__["default"](taskName, taskDescription, task.getDate()));
+      });
+    });
+
+    this.getProject('This week').setTasks(
+      this.getProject('This week').getTasks().sort((task1, task2) => (0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])(
+        (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date(task1.getDateFormatted())),
+        (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(new Date(task2.getDateFormatted())),
+      )),
+    );
   }
 }
 
@@ -1185,9 +1536,6 @@ function _typeof(obj) {
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
@@ -1201,97 +1549,9 @@ function _typeof(obj) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/ensure chunk */
-/******/ 	(() => {
-/******/ 		__webpack_require__.f = {};
-/******/ 		// This file contains only the entry chunk.
-/******/ 		// The chunk loading function for additional chunks
-/******/ 		__webpack_require__.e = (chunkId) => {
-/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce((promises, key) => {
-/******/ 				__webpack_require__.f[key](chunkId, promises);
-/******/ 				return promises;
-/******/ 			}, []));
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/get javascript chunk filename */
-/******/ 	(() => {
-/******/ 		// This function allow to reference async chunks
-/******/ 		__webpack_require__.u = (chunkId) => {
-/******/ 			// return url for filenames based on template
-/******/ 			return "" + chunkId + ".main.js";
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/get mini-css chunk filename */
-/******/ 	(() => {
-/******/ 		// This function allow to reference async chunks
-/******/ 		__webpack_require__.miniCssF = (chunkId) => {
-/******/ 			// return url for filenames based on template
-/******/ 			return undefined;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/load script */
-/******/ 	(() => {
-/******/ 		var inProgress = {};
-/******/ 		var dataWebpackPrefix = "todo-list-project:";
-/******/ 		// loadScript function to load a script via script tag
-/******/ 		__webpack_require__.l = (url, done, key, chunkId) => {
-/******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
-/******/ 			var script, needAttach;
-/******/ 			if(key !== undefined) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				for(var i = 0; i < scripts.length; i++) {
-/******/ 					var s = scripts[i];
-/******/ 					if(s.getAttribute("src") == url || s.getAttribute("data-webpack") == dataWebpackPrefix + key) { script = s; break; }
-/******/ 				}
-/******/ 			}
-/******/ 			if(!script) {
-/******/ 				needAttach = true;
-/******/ 				script = document.createElement('script');
-/******/ 		
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
-/******/ 				}
-/******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
-/******/ 				script.src = url;
-/******/ 			}
-/******/ 			inProgress[url] = [done];
-/******/ 			var onScriptComplete = (prev, event) => {
-/******/ 				// avoid mem leaks in IE.
-/******/ 				script.onerror = script.onload = null;
-/******/ 				clearTimeout(timeout);
-/******/ 				var doneFns = inProgress[url];
-/******/ 				delete inProgress[url];
-/******/ 				script.parentNode && script.parentNode.removeChild(script);
-/******/ 				doneFns && doneFns.forEach((fn) => (fn(event)));
-/******/ 				if(prev) return prev(event);
-/******/ 			}
-/******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
-/******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
-/******/ 			script.onload = onScriptComplete.bind(null, script.onload);
-/******/ 			needAttach && document.head.appendChild(script);
-/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
@@ -1303,119 +1563,6 @@ function _typeof(obj) {
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src;
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) {
-/******/ 					var i = scripts.length - 1;
-/******/ 					while (i > -1 && !scriptUrl) scriptUrl = scripts[i--].src;
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/jsonp chunk loading */
-/******/ 	(() => {
-/******/ 		// no baseURI
-/******/ 		
-/******/ 		// object to store loaded and loading chunks
-/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
-/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
-/******/ 		var installedChunks = {
-/******/ 			"main": 0
-/******/ 		};
-/******/ 		
-/******/ 		__webpack_require__.f.j = (chunkId, promises) => {
-/******/ 				// JSONP chunk loading for javascript
-/******/ 				var installedChunkData = __webpack_require__.o(installedChunks, chunkId) ? installedChunks[chunkId] : undefined;
-/******/ 				if(installedChunkData !== 0) { // 0 means "already installed".
-/******/ 		
-/******/ 					// a Promise means "currently loading".
-/******/ 					if(installedChunkData) {
-/******/ 						promises.push(installedChunkData[2]);
-/******/ 					} else {
-/******/ 						if(true) { // all chunks have JS
-/******/ 							// setup Promise in chunk cache
-/******/ 							var promise = new Promise((resolve, reject) => (installedChunkData = installedChunks[chunkId] = [resolve, reject]));
-/******/ 							promises.push(installedChunkData[2] = promise);
-/******/ 		
-/******/ 							// start chunk loading
-/******/ 							var url = __webpack_require__.p + __webpack_require__.u(chunkId);
-/******/ 							// create error before stack unwound to get useful stacktrace later
-/******/ 							var error = new Error();
-/******/ 							var loadingEnded = (event) => {
-/******/ 								if(__webpack_require__.o(installedChunks, chunkId)) {
-/******/ 									installedChunkData = installedChunks[chunkId];
-/******/ 									if(installedChunkData !== 0) installedChunks[chunkId] = undefined;
-/******/ 									if(installedChunkData) {
-/******/ 										var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 										var realSrc = event && event.target && event.target.src;
-/******/ 										error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
-/******/ 										error.name = 'ChunkLoadError';
-/******/ 										error.type = errorType;
-/******/ 										error.request = realSrc;
-/******/ 										installedChunkData[1](error);
-/******/ 									}
-/******/ 								}
-/******/ 							};
-/******/ 							__webpack_require__.l(url, loadingEnded, "chunk-" + chunkId, chunkId);
-/******/ 						} else installedChunks[chunkId] = 0;
-/******/ 					}
-/******/ 				}
-/******/ 		};
-/******/ 		
-/******/ 		// no prefetching
-/******/ 		
-/******/ 		// no preloaded
-/******/ 		
-/******/ 		// no HMR
-/******/ 		
-/******/ 		// no HMR manifest
-/******/ 		
-/******/ 		// no on chunks loaded
-/******/ 		
-/******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
-/******/ 			var [chunkIds, moreModules, runtime] = data;
-/******/ 			// add "moreModules" to the modules object,
-/******/ 			// then flag all "chunkIds" as loaded and fire callback
-/******/ 			var moduleId, chunkId, i = 0;
-/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
-/******/ 				for(moduleId in moreModules) {
-/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
-/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
-/******/ 					}
-/******/ 				}
-/******/ 				if(runtime) var result = runtime(__webpack_require__);
-/******/ 			}
-/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
-/******/ 			for(;i < chunkIds.length; i++) {
-/******/ 				chunkId = chunkIds[i];
-/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
-/******/ 					installedChunks[chunkId][0]();
-/******/ 				}
-/******/ 				installedChunks[chunkId] = 0;
-/******/ 			}
-/******/ 		
-/******/ 		}
-/******/ 		
-/******/ 		var chunkLoadingGlobal = self["webpackChunktodo_list_project"] = self["webpackChunktodo_list_project"] || [];
-/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
 /******/ 	
 /************************************************************************/

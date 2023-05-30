@@ -1,11 +1,11 @@
 /* eslint-disable no-console */
+// import(/* webpackChunkName: "task" */ './tasks').then((taskModule) => {
+//   Task = taskModule.default;
+// });
+
 import { compareAsc, toDate } from 'date-fns';
 import Project from './projects';
 import Task from './tasks';
-
-import(/* webpackChunkName: "task" */ './tasks').then((taskModule) => {
-  Task = taskModule.default;
-});
 
 export default class TodoList {
   constructor() {
@@ -25,7 +25,7 @@ export default class TodoList {
   }
 
   getProject(projectName) {
-    return this.getProjects.find((project) => project.getName() === projectName);
+    return this.getProjects().find((project) => project.getName() === projectName);
   }
 
   contains(projectName) {

@@ -1,17 +1,26 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-console */
-import { createProjectCreation } from './creation-segments';
-import { closePopup, closeProjectFormPopup } from './utilities';
+
 import {
+  createProjectCreation,
   displayTasks,
   createTask,
   getCurrentProject,
-} from './tasks';
+} from './creation-segments';
+import { closePopup, closeProjectFormPopup } from './utilities';
+// import {
+//   displayTasks,
+//   createTask,
+//   getCurrentProject,
+// } from './tasks';
+// import Task from './tasks';
 import { createProjectMain } from './projects';
+import Storage from './storage';
 
 class UserInterface {
-  // constructor() {
-  //   this.storage = new Storage();
-  // }
+  constructor() {
+    this.storage = new Storage();
+  }
 
   loadProjects() {
     console.log('loadProjects was used in UI');

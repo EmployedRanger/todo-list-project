@@ -5,10 +5,10 @@
 
 import { } from './projects';
 // import Storage from './storage';
-let Storage;
-import(/* webpackChunkName: "storage" */ './storage').then((module) => {
-  Storage = module.default;
-});
+// let Storage;
+// import(/* webpackChunkName: "storage" */ './storage').then((module) => {
+//   Storage = module.default;
+// });
 
 /* eslint-disable no-console */
 export default class Task {
@@ -36,10 +36,10 @@ export default class Task {
     return this.description;
   }
 
-  setTimeline(timeline) {
-    console.log('setTimeline in tasks was used');
-    this.timeline = timeline;
-  }
+  // setTimeline(timeline) {
+  //   console.log('setTimeline in tasks was used');
+  //   this.timeline = timeline;
+  // }
 
   // getDate() {
   //   console.log('getDate in tasks was used');
@@ -55,85 +55,85 @@ export default class Task {
   // }
 }
 
-function deleteTask(project, taskName) {
-  const tasks = project.getTasks();
-  const updatedTasks = tasks.filter((task) => task.getName() !== taskName);
-  Storage.deleteTask(taskName);
-  project.setTasks(updatedTasks);
-}
+// function deleteTask(project, taskName) {
+//   const tasks = project.getTasks();
+//   const updatedTasks = tasks.filter((task) => task.getName() !== taskName);
+//   Storage.deleteTask(taskName);
+//   project.setTasks(updatedTasks);
+// }
 
-function createTaskInProject(taskName, description, project) {
-  const todoSection = document.querySelector('.Todo-section');
+// function createTaskInProject(taskName, description, project) {
+//   const todoSection = document.querySelector('.Todo-section');
 
-  console.log('createTaskInProject was called');
-  const taskItem = document.createElement('div');
-  taskItem.classList.add('task-item');
+//   console.log('createTaskInProject was called');
+//   const taskItem = document.createElement('div');
+//   taskItem.classList.add('task-item');
 
-  const taskTitle = document.createElement('div');
-  taskTitle.classList.add('task-name');
-  taskTitle.textContent = taskName;
-  taskItem.appendChild(taskTitle);
+//   const taskTitle = document.createElement('div');
+//   taskTitle.classList.add('task-name');
+//   taskTitle.textContent = taskName;
+//   taskItem.appendChild(taskTitle);
 
-  const taskDescription = document.createElement('div');
-  taskDescription.classList.add('task-description');
-  taskDescription.textContent = description;
+//   const taskDescription = document.createElement('div');
+//   taskDescription.classList.add('task-description');
+//   taskDescription.textContent = description;
 
-  const taskIcon = document.createElement('span');
-  taskIcon.classList.add('material-symbols-outlined');
-  taskIcon.classList.add('icon-button');
-  taskIcon.textContent = 'check_circle';
-  taskIcon.addEventListener('click', () => {
-    deleteTask(project, taskName);
-    taskItem.remove();
-  });
+//   const taskIcon = document.createElement('span');
+//   taskIcon.classList.add('material-symbols-outlined');
+//   taskIcon.classList.add('icon-button');
+//   taskIcon.textContent = 'check_circle';
+//   taskIcon.addEventListener('click', () => {
+//     deleteTask(project, taskName);
+//     taskItem.remove();
+//   });
 
-  Storage.addTask(project, taskName);
-  taskItem.appendChild(taskDescription);
-  taskItem.appendChild(taskIcon);
-  todoSection.appendChild(taskItem);
-}
+//   Storage.addTask(project, taskName);
+//   taskItem.appendChild(taskDescription);
+//   taskItem.appendChild(taskIcon);
+//   todoSection.appendChild(taskItem);
+// }
 
-export function createTask(title, description) {
-  const newTask = new Task(title, description);
-  return newTask;
-}
+// export function createTask(title, description) {
+//   const newTask = new Task(title, description);
+//   return newTask;
+// }
 
-let currentProject = null;
+// let currentProject = null;
 
-export function getCurrentProject() {
-  return currentProject;
-}
+// export function getCurrentProject() {
+//   return currentProject;
+// }
 
-export function displayTasks(project) {
-  const contentArea = document.getElementsByClassName('Todo-section')[0];
-  contentArea.innerHTML = '';
+// export function displayTasks(project) {
+//   const contentArea = document.getElementsByClassName('Todo-section')[0];
+//   contentArea.innerHTML = '';
 
-  const taskList = project.getTasks();
+//   const taskList = project.getTasks();
 
-  // Creates and adds task elements
-  taskList.forEach((task) => {
-    const taskName = task.getName();
-    const taskDescription = task.getDescription();
-    createTaskInProject(taskName, taskDescription, project);
-  });
-}
+//   // Creates and adds task elements
+//   taskList.forEach((task) => {
+//     const taskName = task.getName();
+//     const taskDescription = task.getDescription();
+//     createTaskInProject(taskName, taskDescription, project);
+//   });
+// }
 
-export function switchProject(project) {
-  console.log('switchProject was called in tasks.js');
-  console.log(project);
-  const newTitleName = document.getElementsByClassName('list-title')[0];
-  newTitleName.textContent = '';
-  newTitleName.textContent = project.getName();
+// export function switchProject(project) {
+//   console.log('switchProject was called in tasks.js');
+//   console.log(project);
+//   const newTitleName = document.getElementsByClassName('list-title')[0];
+//   newTitleName.textContent = '';
+//   newTitleName.textContent = project.getName();
 
-  currentProject = project;
-  displayTasks(currentProject);
-}
+//   currentProject = project;
+//   displayTasks(currentProject);
+// }
 
-export function addTaskToCurrentProject(title, description) {
-  const project = getCurrentProject();
-  if (project) {
-    const newTask = createTask(title, description);
-    currentProject.addTask(newTask);
-    displayTasks(currentProject.getTasks);
-  }
-}
+// export function addTaskToCurrentProject(title, description) {
+//   const project = getCurrentProject();
+//   if (project) {
+//     const newTask = createTask(title, description);
+//     currentProject.addTask(newTask);
+//     displayTasks(currentProject.getTasks);
+//   }
+// }

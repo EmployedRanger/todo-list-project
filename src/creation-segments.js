@@ -5,27 +5,84 @@
 
 import { closeProjectFormPopup, makeProjectFormActive } from './utilities';
 import Project from './projects';
-import { switchProject } from './tasks';
+import Task from './tasks';
+import Storage from './storage';
 
 const listProjects = [];
 const userProjects = [];
+let currentProject = null;
 
-export class Task {
-  constructor(name, description, timeline = 'No date') {
-    this.name = name;
-    this.description = description;
-    this.timeline = timeline;
-  }
 
-  setName(name) {
-    console.log('setName in tasks was used');
-    this.name = name;
-  }
+function deleteTask(project, taskName) {
+  const tasks = project.getTasks();
+  const updatedTasks = tasks.filter((task) => task.getName() !== taskName);
+  Storage.deleteTask(taskName);
+  project.setTasks(updatedTasks);
+}
 
-  setDescription(description) {
-    console.log('setDescription in tasks was used');
-    this.description = description;
-  }
+export function createTask(title, description) {
+  const newTask = new Task(title, description);
+  return newTask;
+}
+
+function createTaskInProject(taskName, description, project) {
+  const todoSection = document.querySelector('.Todo-section');
+
+  console.log('createTaskInProject was called');
+  const taskItem = document.createElement('div');
+  taskItem.classList.add('task-item');
+
+  const taskTitle = document.createElement('div');
+  taskTitle.classList.add('task-name');
+  taskTitle.textContent = taskName;
+  taskItem.appendChild(taskTitle);
+
+  const taskDescription = document.createElement('div');
+  taskDescription.classList.add('task-description');
+  taskDescription.textContent = description;
+
+  const taskIcon = document.createElement('span');
+  taskIcon.classList.add('material-symbols-outlined');
+  taskIcon.classList.add('icon-button');
+  taskIcon.textContent = 'check_circle';
+  taskIcon.addEventListener('click', () => {
+    deleteTask(project, taskName);
+    taskItem.remove();
+  });
+
+  Storage.addTask(project, taskName);
+  taskItem.appendChild(taskDescription);
+  taskItem.appendChild(taskIcon);
+  todoSection.appendChild(taskItem);
+}
+
+export function displayTasks(project) {
+  const contentArea = document.getElementsByClassName('Todo-section')[0];
+  contentArea.innerHTML = '';
+
+  const taskList = project.getTasks();
+
+  taskList.forEach((task) => {
+    const taskName = task.getName();
+    const taskDescription = task.getDescription();
+    createTaskInProject(taskName, taskDescription, project);
+  });
+}
+
+export function switchProject(project) {
+  console.log('switchProject was called in tasks.js');
+  console.log(project);
+
+  currentProject = project;
+  const newTitleName = document.getElementsByClassName('list-title')[0];
+  newTitleName.textContent = '';
+  newTitleName.textContent = project.getName();
+
+  displayTasks(currentProject);
+}
+
+export function getCurrentProject() {
+  return currentProject;
 }
 
 export function createFormProject() {
@@ -68,7 +125,6 @@ function deleteProject(projectElement) {
     switchProject(listProjects[0]);
   }, 0);
 }
-
 
 export function createScheduledProject(scheduledName, itemTitle, symbolText) {
   const div = document.createElement('button');
@@ -114,7 +170,6 @@ export function createProjectCreation(projectName, icon, addNew) {
 
   const project = new Project(projectName);
   userProjects.push(project);
-
   projectDiv.dataset.project = JSON.stringify(project);
 
   projectDiv.addEventListener('click', () => {
@@ -151,3 +206,30 @@ export function createProjectCreation(projectName, icon, addNew) {
   }
   return projectDiv;
 }
+
+// export class Task {
+//   constructor(name, description, timeline = 'No date') {
+//     this.name = name;
+//     this.description = description;
+//     this.timeline = timeline;
+//   }
+
+//   setName(name) {
+//     console.log('setName in tasks was used');
+//     this.name = name;
+//   }
+
+//   setDescription(description) {
+//     console.log('setDescription in tasks was used');
+//     this.description = description;
+//   }
+// }
+
+// export function addTaskToCurrentProject(title, description) {
+//   const project = getCurrentProject();
+//   if (project) {
+//     const newTask = createTask(title, description);
+//     currentProject.addTask(newTask);
+//     displayTasks(currentProject.getTasks);
+//   }
+// }
