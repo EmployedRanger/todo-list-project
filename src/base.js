@@ -10,7 +10,7 @@ import {
   createFormProject,
 } from './creation-segments';
 import { makeItemActive, closePopup } from './utilities';
-import { applyClicksButtons } from './interface';
+import applyClicksButtons from './interface';
 
 function createHeader() {
   const pageBody = document.querySelector('#content')
@@ -44,7 +44,7 @@ function createFooter() {
   return footer;
 }
 
-export function createForm() {
+export default function createForm() {
   const addContainer = document.createElement('div')
   addContainer.classList.add('add-container')
   const titleContainer = document.createElement('input')
@@ -166,7 +166,7 @@ function createMainSection() {
   content.appendChild(mainSection);
 }
 
-export default function startup() {
+function startup() {
   const content = document.querySelector('#content');
   content.appendChild(createHeader());
   createMainSection();

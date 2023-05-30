@@ -52,6 +52,7 @@ export default class Task {
 function deleteTask(project, taskName) {
   const tasks = project.getTasks();
   const updatedTasks = tasks.filter((task) => task.getName() !== taskName);
+  Storage.deleteTask(taskName);
   project.setTasks(updatedTasks);
 }
 
@@ -80,6 +81,7 @@ function createTaskInProject(taskName, description, project) {
     taskItem.remove();
   });
 
+  Storage.addTask(project, taskName);
   taskItem.appendChild(taskDescription);
   taskItem.appendChild(taskIcon);
   todoSection.appendChild(taskItem);

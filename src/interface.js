@@ -1,55 +1,62 @@
 /* eslint-disable no-console */
-// import { format } from 'date-fns';
 import { createProjectCreation } from './creation-segments';
 import { closePopup, closeProjectFormPopup } from './utilities';
 import {
-  displayTasks, createTask, getCurrentProject,
+  displayTasks,
+  createTask,
+  getCurrentProject,
 } from './tasks';
 import { createProjectMain } from './projects';
+import Storage from './storage';
 
-export default class UserInterface {
-  static loadProjects() {
+class UserInterface {
+  constructor() {
+    this.storage = new Storage();
+  }
+
+  loadProjects() {
     console.log('loadProjects was used in UI');
-    Storage.getTodoList().getProjects().forEach((project) => {
+    this.storage.getTodo().getProjects().forEach((project) => {
       if (
-        project.name !== 'Current'
-        && project.name !== 'Today'
-        && project.name !== 'This week'
+        project.getName() !== 'Current'
+        && project.getName() !== 'Today'
+        && project.getName() !== 'This week'
       ) {
-        this.createProject(project.name);
+        this.createProject(project.getName());
       }
     });
   }
 
-  static createProject() {
+  createProject() {
     console.log('createProject ran from inside UI');
     const titleProject = document.querySelector('#project-title-input').value;
     const project = createProjectMain(titleProject);
 
     const projectName = document.querySelector('.list-container-projects');
-    projectName.appendChild(createProjectCreation(project.name, 'task', ''));
+    projectName.appendChild(createProjectCreation(project.getName(), 'task', ''));
+    this.storage.addProject(project);
 
     closeProjectFormPopup();
   }
 
-  static switchProject(project) {
+  switchProject(project) {
     console.log('switchProject was called from UI');
     const projectTasks = project.getTasks();
     displayTasks(projectTasks);
   }
 
-  static submitNewTask() {
+  submitNewTask() {
     const titleTask = document.querySelector('#input-title');
     const descriptionTask = document.querySelector('#input-description');
-
     const titleValue = titleTask.value;
     const descriptionValue = descriptionTask.value;
-
     const currentProject = getCurrentProject();
+
     if (currentProject) {
       const newTask = createTask(titleValue, descriptionValue);
       currentProject.addTask(newTask);
       displayTasks(currentProject);
+      this.storage.addTask(currentProject.getName(), newTask);
     }
 
     closePopup();
@@ -58,14 +65,24 @@ export default class UserInterface {
   }
 }
 
-export function applyClicksButtons() {
+export default function applyClicksButtons() {
+  const ui = new UserInterface();
+
   const addTaskButton = document.querySelector('.submit-form');
   addTaskButton.addEventListener('click', () => {
-    UserInterface.submitNewTask();
+    ui.submitNewTask();
   });
 
   const addProjectButton = document.querySelector('.submit-new-project');
   addProjectButton.addEventListener('click', () => {
-    UserInterface.createProject();
+    ui.createProject();
+  });
+
+  const projectButtons = document.querySelectorAll('.project');
+  projectButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const project = JSON.parse(button.dataset.project);
+      ui.switchProject(project);
+    });
   });
 }
