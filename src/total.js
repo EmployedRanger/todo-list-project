@@ -1,8 +1,6 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable no-console */
 
-import 
-
 // interface.js
 class UserInterface {
   // constructor() {
@@ -135,25 +133,25 @@ class TodoList {
     });
   }
 
-  updateWeekProject() {
-    this.getProject('This week').tasks = [];
+  // updateWeekProject() {
+  //   this.getProject('This week').tasks = [];
 
-    this.projects.forEach((project) => {
-      if (project.getName() === 'This week' || project.getName() === 'Today') return;
+  //   this.projects.forEach((project) => {
+  //     if (project.getName() === 'This week' || project.getName() === 'Today') return;
 
-      const weekTasks = project.getWeeklyTasks();
-      weekTasks.forEach((task) => {
-        const taskName = `${task.getName()} {$(project.getName()})`;
-        const taskDescription = `${task.getDescription()} {$(project.getDescription()})`;
-        this.getProject('Today').addTask(new Task(taskName, taskDescription, task.getDate()));
-      });
-    });
+  //     const weekTasks = project.getWeeklyTasks();
+  //     weekTasks.forEach((task) => {
+  //       const taskName = `${task.getName()} {$(project.getName()})`;
+  //       const taskDescription = `${task.getDescription()} {$(project.getDescription()})`;
+  //       this.getProject('Today').addTask(new Task(taskName, taskDescription, task.getDate()));
+  //     });
+  //   });
 
-    this.getProject('This week').setTasks(
-      this.getProject('This week').getTasks().sort((task1, task2) => compareAsc(
-        toDate(new Date(task1.getDateFormatted())),
-        toDate(new Date(task2.getDateFormatted())),
-      )),
-    );
-  }
+  //   this.getProject('This week').setTasks(
+  //     this.getProject('This week').getTasks().sort((task1, task2) => compareAsc(
+  //       toDate(new Date(task1.getDateFormatted())),
+  //       toDate(new Date(task2.getDateFormatted())),
+  //     )),
+  //   );
+  // }
 }

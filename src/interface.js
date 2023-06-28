@@ -19,7 +19,7 @@ import Storage from './storage';
 
 class UserInterface {
   constructor() {
-    this.storage = new Storage();
+    this.storage = Storage;
   }
 
   loadProjects() {
@@ -47,6 +47,7 @@ class UserInterface {
     closeProjectFormPopup();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   switchProject(project) {
     console.log('switchProject was called from UI');
     const projectTasks = project.getTasks();

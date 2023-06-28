@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import {
-  isToday, toDate, subDays, isThisWeek,
-} from 'date-fns';
+// import {
+//   isToday, toDate, subDays, isThisWeek,
+// } from 'date-fns';
 
 // const { v4: uuidv4 } = require('uuid');
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 const projectList = [];
 
@@ -84,13 +84,13 @@ export default class Project {
     });
   }
 
-  getWeeklyTasks() {
-    console.log('getWeeklyTasks was used');
-    return this.tasks.filter((task) => {
-      const taskDate = new Date(task.getDateFormatted());
-      return isThisWeek(subDays(toDate(taskDate), 1));
-    });
-  }
+  // getWeeklyTasks() {
+  //   console.log('getWeeklyTasks was used');
+  //   return this.tasks.filter((task) => {
+  //     const taskDate = new Date(task.getDateFormatted());
+  //     return isThisWeek(subDays(toDate(taskDate), 1));
+  //   });
+  // }
 }
 
 export function createProjectMain(title) {

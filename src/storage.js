@@ -41,6 +41,8 @@ const Storage = {
 
   addTask(projectName, task) {
     const todoList = Storage.getTodo();
+    console.log(todoList);
+    console.log('todoList.getProject()', todoList.getProject(projectName));
     todoList.getProject(projectName).addTask(task);
     Storage.saveList(todoList);
   },

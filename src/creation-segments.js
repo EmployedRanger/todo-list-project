@@ -49,6 +49,8 @@ function createTaskInProject(taskName, description, project) {
     deleteTask(project, taskName);
     taskItem.remove();
   });
+  console.log('project is:', project);
+  console.log('task is:', taskName);
 
   Storage.addTask(project, taskName);
   taskItem.appendChild(taskDescription);

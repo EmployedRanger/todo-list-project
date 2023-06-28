@@ -109,7 +109,7 @@ function createSidebar() {
   addProject.classList.add('add-project')
 
   listContainer.appendChild(createProjectCreation('Mow the lawn', 'task', ''))
-  listContainer.appendChild(createProjectCreation('Count chips', 'task', ''))
+  listContainer.appendChild(createProjectCreation('Go to store', 'task', ''))
   projectContainer.appendChild(createProjectCreation('Add Project', 'add', 'yes'))
   projectContainer.appendChild(createFormProject())
 
